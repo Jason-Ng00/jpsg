@@ -1,0 +1,29 @@
+table {
+    margin:20px 0px 50px 0px;
+    thead {
+        tr {
+            background-color:#EEEEEE;
+        }
+
+        th {
+            padding:10px;
+        }
+    }
+
+    tbody {
+        tr:nth-child(even)   { background-color:#eee; }
+        tr:nth-child(odd)    { background-color:#fff; }
+
+        td {
+            padding:10px;
+        }
+    }
+}
+
+strong {
+    margin:40px 0px -10px 0px
+}
+
+p {
+    margin-bottom:20px;
+}

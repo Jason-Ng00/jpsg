@@ -42,7 +42,7 @@ export default function NavBar({ location }) {
             menuItem.push(edge.node.breadcrumb[0].name)
             menuData.push(edge.node.breadcrumb)
           } else {
-            for( var i =1; i < menuData.length; i++) {
+            for( var i =0; i < menuData.length; i++) {
               if(menuData[i][0].name === edge.node.breadcrumb[0].name) {
                 menuData[i].push(edge.node.breadcrumb[1])
               }
@@ -77,13 +77,18 @@ export default function NavBar({ location }) {
                           dropdownItem.push(navItem[i].name)
                       }
                   }
-                return <HoverControlledDropdown style={url.includes(navItem[0].name.toLowerCase().replace(" ","-")) ? activeStyles : {}} key={navItem[0].name} className={styles.navItemDropdown} title={navItem[0].name}>
+                return <HoverControlledDropdown style={url.includes(navItem[0].name.toLowerCase().replaceAll(" ","-")) ? activeStyles : {}} key={navItem[0].name} className={styles.navItemDropdown} title={navItem[0].name}>
                 {rows}
              </HoverControlledDropdown>
 
             }
      })}
-     
+              <HoverControlledDropdown style={url.includes("highlights".toLowerCase().replaceAll(" ","-")) ? activeStyles : {}} key="Highlights" className={styles.navItemDropdown} title="Highlights">
+                <Link key="Visualize by Genre" className={styles.navDropdown} to="/highlights/genre" target="_self">Visualize by Genre</Link>
+                <Link key="Visualize by Major Venues" className={styles.navDropdown} to="/highlights/venue" target="_self">Visualize by Venues</Link>
+                <Link key="Visualize by Mojor Organizers" className={styles.navDropdown} to="/highlights/organizers" target="_self">Visualize by Major Organizers</Link>
+                <Link key="Population Trend Mapping" className={styles.navDropdown} to="/highlights/pop" target="_self">Population Trend Mapping</Link>
+             </HoverControlledDropdown>
             </Nav>
             </Navbar.Collapse>
 

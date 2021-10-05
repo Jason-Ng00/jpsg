@@ -4,6 +4,9 @@ import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/Layout/Layout.js"
 import Seo from "../components/seo"
+import EventList from "../components/EventList/EventList.js"
+import BarGraph from "../components/BarGraph/BarGraph.js"
+import data from '../components/EventList/mockdata.json';
 
 const IndexPage = () => (
   <Layout>
@@ -19,6 +22,8 @@ const IndexPage = () => (
       alt="A Gatsby astronaut"
       style={{ marginBottom: `1.45rem` }}
     />
+
+    <EventList data={data} attribute = {["id", "first_name", "last_name", "email", "phone"]}/>
     <p>
       <Link to="/page-2/">Go to page 2</Link> <br />
       <Link to="/using-typescript/">Go to "Using TypeScript"</Link>

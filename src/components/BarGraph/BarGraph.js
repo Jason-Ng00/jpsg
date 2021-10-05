@@ -1,0 +1,40 @@
+import * as React from "react"
+import { useState, useEffect } from 'react';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+export default function BarGraph(props) { 
+
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  
+  const handleClick = (data, index) => {
+    setActiveIndex(index);
+    if(props.click) {
+      props.click(props.data[index].year)
+    }
+
+  };
+  const data = props.data
+
+  const activeItem = data[activeIndex];
+    return (
+      <div style={{ width: '100%' }}>
+        <div>{props.title}</div>
+
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart width={150} height={80} data={data}>
+          <YAxis label={{ value: props.yaxisName ? props.yaxisName : props.yaxis, angle: -90}} />
+          <Tooltip />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <XAxis dataKey={props.xaxis} label={{ value: props.xaxis, position: 'insideBottomRight', offset: 0 }}/>
+            <Bar dataKey={props.yaxis} onClick={handleClick}>
+            {data.map((entry, index) => (
+                <Cell cursor="pointer" fill={index === activeIndex ? '#82ca9d' : '#8884d8'} key={`cell-${index}`} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+
+        {activeIndex && <p className="content">{`Uv of "${activeItem.value}": ${activeItem.year}`}</p>}
+      </div>
+    );
+}

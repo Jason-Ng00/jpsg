@@ -24,8 +24,16 @@ module.exports = {
     {
       resolve: "gatsby-source-google-docs",
       options: {
-        folder: "1LvS54cyy-9Kr-1gmBS-XvFNMkBruEUOB",
+        folder: "1-uD-DtSU-jM7FWHRSFeQ3K2Dv0s85rf_",
         createPages: true,
+      },
+    },
+    `gatsby-transformer-csv`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data`,
       },
     },
     {

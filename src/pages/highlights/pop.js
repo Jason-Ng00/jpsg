@@ -70,7 +70,6 @@ const Pop = ({
         <Container>
         <div>Chronological chart of number of Japanese people residing in Singapore and number of performances.</div>
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            <div dangerouslySetInnerHTML={{ __html: html }} />
             
         </Container>
 

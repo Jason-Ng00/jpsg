@@ -15,6 +15,7 @@ import data11 from '../components/EventList/mockdata.json';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 import { Map, Marker } from "pigeon-maps"
+import * as styles from './performance-records.scss'
 
 const Page2 = ({
     data: {
@@ -29,39 +30,85 @@ const Page2 = ({
   }) => {
     const eventDetails = chartData.nodes;
     const eventList = [];
+    const mapData = []
     const pageTitle = name.split("_").pop();
     const years=[];
     const newData = [];
     const [selectedYear, setSelectedYear] = React.useState(null);
-    const [selectedDate, setSelectedeDate] = React.useState(null);
+    const [selectedNode, setSelectedeNode] = React.useState(null);
+    
     const [selectedTime, setSelectedTime] = React.useState(null);
     
-    useEffect(() => {},[selectedTime, selectedDate])
-    eventDetails.map(event => 
-      {   if (selectedYear && event.Date.slice(0,4) === selectedYear) {
-            eventList.push(event)
+    useEffect(() => {},[selectedTime, selectedNode])
 
-          } else if(!selectedYear) {
+    const handleClickMap = (node) => {
+        if (selectedNode === node && selectedTime === node.Time) {
+          setSelectedTime(null)
+          setSelectedeNode(null)
+        } else {
+          setSelectedeNode(node)
+          setSelectedTime(node.Time)
+        }
+    }
+
+    if (selectedNode && selectedTime) {
+      eventDetails.map(event => 
+        {   if (event == selectedNode && event.Time == selectedTime) {
               eventList.push(event)
-          }
+            }
+            if (selectedYear && event.Date.slice(0,4) === selectedYear) {
+              mapData.push(event)
 
-         var year = event.Date.slice(0,4);
-         if (!years.includes(year)) {
-             years.push(year);
-             newData.push({
-                 year: year,
-                 value: 1
-             })
-         } else {
-             for(var data of newData) {
-                 if(data.year === year) {
-                     data.value += 1
-                 }  
-             }
-         }
-         return newData
-      }
-  )
+            } else if(!selectedYear) {
+                mapData.push(event)
+            }
+          var year = event.Date.slice(0,4);
+          if (!years.includes(year)) {
+              years.push(year);
+              newData.push({
+                  year: year,
+                  value: 1
+              })
+          } else {
+              for(var data of newData) {
+                  if(data.year === year) {
+                      data.value += 1
+                  }  
+              }
+          }
+          return newData
+        }
+    )
+    } else {
+      eventDetails.map(event => 
+        {   if (selectedYear && event.Date.slice(0,4) === selectedYear) {
+              eventList.push(event)
+              mapData.push(event)
+
+            } else if(!selectedYear) {
+                eventList.push(event)
+                mapData.push(event)
+            }
+
+          var year = event.Date.slice(0,4);
+          if (!years.includes(year)) {
+              years.push(year);
+              newData.push({
+                  year: year,
+                  value: 1
+              })
+          } else {
+              for(var data of newData) {
+                  if(data.year === year) {
+                      data.value += 1
+                  }  
+              }
+          }
+          return newData
+        }
+    )
+    }
+
 
     newData.sort(function(a, b) {
       var keyA = Number(a.year),
@@ -81,38 +128,36 @@ const Page2 = ({
           </h1>
   
         </Jumbotron>
-
         <Container>
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+      </Container>
+        <Container>
+
         <BarGraph data={newData} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
-        <EventList data={eventList} attribute={["Performance_Title","Genres_concatenated","Time"]}></EventList>
+        <Row>
+        <Col>
+        <Map className={styles.map} height={500} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
 
+        {/* <Marker width={50} anchor={[parseFloat(eventList[6].Latitude), parseFloat(eventList[6].Longtitude)]} />  */}
+        {/* {alert(JSON.stringify(eventList[6].Latitude))} */}
+        {mapData.map(node => {
+          const lat = node.Latitude ? parseFloat(node.Latitude) : null
+          const long = node.Longtitude ? parseFloat(node.Longtitude) : null
 
-        <Map height={300} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
-          <Marker width={50} anchor={[1.3521, 103.8198]} /> 
+          return (
+            <Marker width={50} anchor={[lat, long]} onClick={() => {handleClickMap(node)} }/> 
+          );
+        })}
 
-          {/* <Marker width={50} anchor={[parseFloat(eventList[6].Latitude), parseFloat(eventList[6].Longtitude)]} />  */}
-          {/* {alert(JSON.stringify(eventList[6].Latitude))} */}
-          {eventList.map(node => {
-            const lat = node.Latitude ? parseFloat(node.Latitude) : null
-            const long = node.Longtitude ? parseFloat(node.Longtitude) : null
-          
-            return (
-              <Marker width={50} anchor={[lat, long]} onClick={() => {setSelectedeDate(node.Date); setSelectedTime(node.Time)}} /> 
-            );
-          })}
-          
-
-          {eventList.filter(node => node.Date == selectedDate && node.Time == selectedTime).map(node => {
-            return (
-              <Container>
-              <h1>{node.English_name_of_performing_troupes__performers_concatenated}</h1>
-              <div>{node.Date}</div>
-              <div>{node.Time}</div>
-              </Container>
-            );
-          })
-          }
         </Map>
+        </Col>
+        <Col>
+        <EventList className={styles.eventlist} data={eventList} attribute={["Performance_Title","Genres_concatenated","Time"]}></EventList>
+        </Col>
+        </Row>
+
+
+
             
         </Container>
 

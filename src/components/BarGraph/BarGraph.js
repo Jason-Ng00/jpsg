@@ -4,12 +4,15 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 
 export default function BarGraph(props) { 
 
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState(null);
   
   const handleClick = (data, index) => {
-    setActiveIndex(index);
-    if(props.click) {
+    if(props.click && index != activeIndex) {
+      setActiveIndex(index);
       props.click(props.data[index].year)
+    } else if (props.click) {
+      setActiveIndex(null);
+      props.click(null)
     }
 
   };
@@ -34,7 +37,7 @@ export default function BarGraph(props) {
           </BarChart>
         </ResponsiveContainer>
 
-        {activeIndex && <p className="content">{`Uv of "${activeItem.value}": ${activeItem.year}`}</p>}
+        {/* {activeIndex && <p className="content">{`Uv of "${activeItem.value}": ${activeItem.year}`}</p>} */}
       </div>
     );
 }

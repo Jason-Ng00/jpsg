@@ -54,16 +54,24 @@ export default function NavBar({ location }) {
 
   const activeStyles={borderBottom: "3px solid #ef7c00", color:"#003D7C"};
   const url = typeof window !== 'undefined' ? window.location.href : '';
+  const menuSort = ["Introduction", "About this Project", "Historical Context", "Performance Records", "Highlights"]
 
+  menuData.sort(function(a, b) {
+    var keyA = menuSort.indexOf(a[0].name),
+      keyB = menuSort.indexOf(b[0].name);
+    // Compare the 2 year
+    if (keyA < keyB) return -1;
+    if (keyA > keyB) return 1;
+    return 0;
+  });
   return (
     <Container className={styles.navbar}>
         <Container>
         <Navbar expand="sm">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-            
             <Nav className="me-auto">
-                <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/">Home</Link>
+                {/* <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/">Home</Link> */}
                 
                 {menuData.map((navItem) => {
                   if(navItem.length === 1) {

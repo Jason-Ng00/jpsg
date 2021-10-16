@@ -1,3 +1,14 @@
+// exports.createPages = async ({ actions }) => {
+//     const { createRedirect } = actions
+  
+//     createRedirect({
+//       fromPath: '/',
+//       toPath: '/introduction',
+//       isPermanent: true,
+//       redirectInBrowser: true,
+//    })
+//   }
+
 /**
  * Implement Gatsby's Node APIs in this file.
  *

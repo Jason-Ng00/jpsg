@@ -85,18 +85,23 @@ export default function NavBar({ location }) {
                           dropdownItem.push(navItem[i].name)
                       }
                   }
-                return <HoverControlledDropdown style={url.includes(navItem[0].name.toLowerCase().replaceAll(" ","-")) ? activeStyles : {}} key={navItem[0].name} className={styles.navItemDropdown} title={navItem[0].name}>
+                return <HoverControlledDropdown style={url.includes(navItem[0].name.toLowerCase()) ? activeStyles : {}} key={navItem[0].name} className={styles.navItemDropdown} title={navItem[0].name}>
+                {/* return <HoverControlledDropdown style={url.includes(navItem[0].name.toLowerCase().replaceAll(" ","-")) ? activeStyles : {}} key={navItem[0].name} className={styles.navItemDropdown} title={navItem[0].name}> */}
+
                 {rows}
              </HoverControlledDropdown>
 
             }
      })}
-              <HoverControlledDropdown style={url.includes("highlights".toLowerCase().replaceAll(" ","-")) ? activeStyles : {}} key="Highlights" className={styles.navItemDropdown} title="Highlights">
+              {/* <HoverControlledDropdown style={url.includes("highlights".toLowerCase().replaceALl(" ","-")) ? activeStyles : {}} key="Highlights" className={styles.navItemDropdown} title="Highlights"> */}
+              <HoverControlledDropdown style={url.includes("highlights") ? activeStyles : {}} key="Highlights" className={styles.navItemDropdown} title="Highlights">
                 <Link key="Visualize by Genre" className={styles.navDropdown} to="/highlights/genre" target="_self">Visualize by Genre</Link>
                 <Link key="Visualize by Major Venues" className={styles.navDropdown} to="/highlights/venue" target="_self">Visualize by Venues</Link>
                 <Link key="Visualize by Mojor Organizers" className={styles.navDropdown} to="/highlights/organizers" target="_self">Visualize by Major Organizers</Link>
                 <Link key="Population Trend Mapping" className={styles.navDropdown} to="/highlights/pop" target="_self">Population Trend Mapping</Link>
              </HoverControlledDropdown>
+
+             <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/new-charts">New Chart</Link>
             </Nav>
             </Navbar.Collapse>
 

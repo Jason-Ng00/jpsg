@@ -12,6 +12,8 @@ import {graphql, useStaticQuery} from "gatsby"
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
+import DropdownSelection from "../../components/DropdownSelection/DropdownSelection.js"
+
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
@@ -110,6 +112,9 @@ const Genre = ({
             {selectedGenre} <DownOutlined />
             </a>
         </Dropdown>
+
+
+        <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedGenre} current={selectedGenre} default="-- Select a Genre --"/>
 
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
 

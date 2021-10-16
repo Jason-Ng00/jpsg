@@ -8,6 +8,8 @@ import Layout from "../components/Layout/Layout.js"
 import Seo from "../components/seo"
 import {graphql, useStaticQuery} from "gatsby"
 
+import { Waypoint } from 'react-waypoint';
+
 
 const Page2 = ({
     data: {

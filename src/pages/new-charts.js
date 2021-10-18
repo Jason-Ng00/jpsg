@@ -206,7 +206,7 @@ const NewChart = ({
               <BarGraph data={newData.filter(data => parseInt(data.year) >= 1960 && parseInt(data.year) < 1970)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
             </Col>
             <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[0]} radius = {100} containerHeight={300} color={"#132d59"}/>
+              <PieChart data = {numberPerformanceByGenreAndDecades[0]} radius = {100} containerHeight={300} color={"#132d59"} label/>
             </Col>
           </Row>
         </Container>

@@ -1,3 +1,4 @@
+import { prop } from "cheerio/lib/api/attributes";
 import * as React from "react"
 import { useState, useEffect } from 'react';
 import { PieChart, Pie, ResponsiveContainer} from 'recharts';
@@ -18,67 +19,13 @@ export default function BarGraph(props) {
   };
   const data = props.data
 
-  const data01 = [
-    {
-      "name": "Group A",
-      "value": 400
-    },
-    {
-      "name": "Group B",
-      "value": 300
-    },
-    {
-      "name": "Group C",
-      "value": 300
-    },
-    {
-      "name": "Group D",
-      "value": 200
-    },
-    {
-      "name": "Group E",
-      "value": 278
-    },
-    {
-      "name": "Group F",
-      "value": 189
-    }
-  ];
-  const data02 = [
-    {
-      "name": "Group A",
-      "value": 2400
-    },
-    {
-      "name": "Group B",
-      "value": 4567
-    },
-    {
-      "name": "Group C",
-      "value": 1398
-    },
-    {
-      "name": "Group D",
-      "value": 9800
-    },
-    {
-      "name": "Group E",
-      "value": 3908
-    },
-    {
-      "name": "Group F",
-      "value": 4800
-    }
-  ];
-
     return (
       <div style={{ width: '100%' }}>
         <div>{props.title}</div>
 
-        <ResponsiveContainer width="100%" height={400}>
+        <ResponsiveContainer width="100%" height={props.containerHeight ? props.containerHeight : 600}>
         <PieChart width={730} height={250}>
-            <Pie data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} fill="#8884d8" />
-            <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#82ca9d" label />
+            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={props.radius ? props.radius : 200} fill= {props.color?props.color:'#8884d8'} label={(entry) => entry.name} />
         </PieChart>
         </ResponsiveContainer>
       </div>

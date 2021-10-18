@@ -31,7 +31,7 @@ export default function BarGraph(props) {
           <XAxis dataKey={props.xaxis} label={{ value: props.xaxis, position: 'insideBottomRight', offset: 0 }}/>
             <Bar dataKey={props.yaxis} onClick={handleClick}>
             {data.map((entry, index) => (
-                <Cell cursor="pointer" fill={index === activeIndex ? '#82ca9d' : '#8884d8'} key={`cell-${index}`} />
+                <Cell cursor="pointer" fill={index === activeIndex ? '#82ca9d' : (props.color?props.color:'#8884d8')} key={`cell-${index}`} />
               ))}
             </Bar>
           </BarChart>

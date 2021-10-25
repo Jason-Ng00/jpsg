@@ -36,15 +36,28 @@ const Genre = ({
             setSelectedYear(null)
         }
     }
+    const genres = chartData.distinct
+    const distinct_genres = []
+    genres.map(genre => {
+        var currGenres = new Array()
+        currGenres = genre.split(";")
+        for (var i = 0; i < currGenres.length; i++) {
+          var currGenre = currGenres[i]
 
+          if (!distinct_genres.includes(currGenre)) {
+            distinct_genres.push(currGenre);
+        }
+      }
+    }
+    )
     const menu = () => { 
-        const genres = chartData.distinct
+
         return(
         <Menu onClick={handleClick}>
           <Menu.Item key="-- Select a Genre --">
               -- Select a Genre --
           </Menu.Item>
-          {genres.map(genre =>  {
+          {distinct_genres.map(genre =>  {
               return(
             <Menu.Item key={genre}>
               {genre}
@@ -60,7 +73,7 @@ const Genre = ({
     if(selectedGenre == "-- Select a Genre --") {
         eventDetails = chartData.nodes;
     } else {
-        eventDetails = chartData.nodes.filter(event => event.Genres_concatenated == selectedGenre)
+        eventDetails = chartData.nodes.filter(event => event.Genres_concatenated.includes(selectedGenre))
     }
 
     eventDetails.map(event => 
@@ -114,7 +127,7 @@ const Genre = ({
         </Dropdown>
 
 
-        <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedGenre} current={selectedGenre} default="-- Select a Genre --"/>
+        <DropdownSelection data = {distinct_genres} handleClick = {setSelectedGenre} current={selectedGenre} default="-- Select a Genre --"/>
 
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
 

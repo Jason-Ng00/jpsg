@@ -1,23 +1,73 @@
 import { prop } from "cheerio/lib/api/attributes";
 import * as React from "react"
 import { useState, useEffect } from 'react';
-import { PieChart, Pie, ResponsiveContainer} from 'recharts';
+import { PieChart, Pie, Sector, Legend,  ResponsiveContainer, Cell} from 'recharts';
 
-export default function BarGraph(props) { 
+const renderActiveShape = (props) => {
+  const RADIAN = Math.PI / 180;
+  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
+  const sin = Math.sin(-RADIAN * midAngle);
+  const cos = Math.cos(-RADIAN * midAngle);
+  const sx = cx + (outerRadius + 10) * cos;
+  const sy = cy + (outerRadius + 10) * sin;
+  const mx = cx + (outerRadius + 30) * cos;
+  const my = cy + (outerRadius + 30) * sin;
+  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  const ey = my;
+  const textAnchor = cos >= 0 ? 'start' : 'end';
 
-  const [activeIndex, setActiveIndex] = React.useState(null);
+  return (
+    <g>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+        {payload.name}
+      </text>
+      <Sector
+        cx={cx}
+        cy={cy}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill={fill}
+      />
+      <Sector
+        cx={cx}
+        cy={cy}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        innerRadius={outerRadius + 6}
+        outerRadius={outerRadius + 10}
+        fill={fill}
+      />
+      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`Number of Performances: ${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+      </text>
+    </g>
+  );
+};
+
+export default function PieGraph(props) { 
+
+  const [activeIndex, setActiveIndex] = React.useState(0);
   
-  const handleClick = (data, index) => {
-    if(props.click && index != activeIndex) {
-      setActiveIndex(index);
-      props.click(props.data[index].year)
-    } else if (props.click) {
-      setActiveIndex(null);
-      props.click(null)
-    }
-
+  const onPieEnter = (_, index) => {
+    setActiveIndex(index)
   };
+
   const data = props.data
+  const COLORS =  ['#FF6633', '#FFB399', '#FF33FF', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#FF1A66', '#E6331A', '#33FFCC',
+		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+		  '#4D8066', '#809980', '#1AFF33', '#999933',
+		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
 
     return (
       <div style={{ width: '100%' }}>
@@ -25,7 +75,19 @@ export default function BarGraph(props) {
 
         <ResponsiveContainer width="100%" height={props.containerHeight ? props.containerHeight : 600}>
         <PieChart width={730} height={250}>
-            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={props.radius ? props.radius : 200} fill= {props.color?props.color:'#8884d8'} label={(entry) => entry.name} />
+        <Legend layout="horizontal" verticalAlign="top" align="right" />
+            <Pie 
+            activeIndex={activeIndex}
+            activeShape={renderActiveShape}
+            data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={props.radius ? props.radius : 200} innerRadius={props.innerRadius ? props.innerRadius : 0} 
+            fill= {props.color?props.color:'#8884d8'} 
+            label={props.label ? (entry) => entry.name: null}
+            align="left" 
+            onMouseEnter={onPieEnter} >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
         </PieChart>
         </ResponsiveContainer>
       </div>

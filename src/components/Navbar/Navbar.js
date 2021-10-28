@@ -102,6 +102,7 @@ export default function NavBar({ location }) {
              </HoverControlledDropdown>
 
              <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/new-charts">New Chart</Link>
+             <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/new-charts2">New Chart 2</Link>
             </Nav>
             </Navbar.Collapse>
 

@@ -24,8 +24,11 @@ import { motion } from "framer-motion"
 import { Container } from 'react-bootstrap'
 import { MDXProvider } from "@mdx-js/react"
 
+
+
 const Layout = ({ children }) => {
   return (
+
     <Container className={styles.layout}>
     <Header />
     <Navbar />

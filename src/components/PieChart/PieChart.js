@@ -5,7 +5,7 @@ import { PieChart, Pie, Sector, Legend,  ResponsiveContainer, Cell} from 'rechar
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
+  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, name, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 10) * cos;
@@ -18,9 +18,9 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
         {payload.name}
-      </text>
+      </text> */}
       <Sector
         cx={cx}
         cy={cy}
@@ -41,9 +41,9 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`Number of Performances: ${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${name}: ${value} performances`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`${(percent * 100).toFixed(2)}% of total`}
       </text>
     </g>
   );
@@ -58,6 +58,34 @@ export default function PieGraph(props) {
   };
 
   const data = props.data
+  data.sort(function(a, b) {
+    var keyA = Number(a.value),
+      keyB = Number(b.value);
+    // Compare the 2 years
+    if (keyA > keyB) return -1;
+    if (keyA < keyB) return 1;
+    return 0;
+  });
+
+
+  var newData = []  
+  for (var i = 0; i < data.length; i++) {
+    if (i < 6) {
+      newData.push(data[i])
+    } else {
+      if (newData.length == 6) {
+        var n = data.length - 6
+        newData.push(
+          {
+            name: n + " Other Genres",
+            value: data[i].value
+          }
+        ) 
+      } else {
+        newData[6].value += data[i].value
+      }
+    }
+  }
   const COLORS =  ['#FF6633', '#FFB399', '#FF33FF', '#00B3E6', 
 		  '#E6B333', '#3366E6', '#999966', '#B34D4D',
 		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
@@ -75,14 +103,12 @@ export default function PieGraph(props) {
 
         <ResponsiveContainer width="100%" height={props.containerHeight ? props.containerHeight : 600}>
         <PieChart width={730} height={250}>
-        <Legend layout="horizontal" verticalAlign="top" align="right" />
+        <Legend layout="horizontal" verticalAlign="top" align="center" />
             <Pie 
             activeIndex={activeIndex}
             activeShape={renderActiveShape}
-            data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={props.radius ? props.radius : 200} innerRadius={props.innerRadius ? props.innerRadius : 0} 
+            data={newData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={props.radius ? props.radius : 200} innerRadius={props.innerRadius ? props.innerRadius : 0} 
             fill= {props.color?props.color:'#8884d8'} 
-            label={props.label ? (entry) => entry.name: null}
-            align="left" 
             onMouseEnter={onPieEnter} >
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -93,3 +119,4 @@ export default function PieGraph(props) {
       </div>
     );
 }
+            // label={props.label ? (entry) => entry.name: null}

@@ -15,8 +15,9 @@ import { useSprings, animated, config } from "react-spring";
 import { Spring } from "react-spring/renderprops";
 import VisibilitySensor from "react-visibility-sensor";
 import { motion, useAnimation } from "framer-motion";
+import * as styles from './styles.module.css'
 
-const NewChart = ({
+const NewChart2 = ({
     data: {
       page: {
         name,
@@ -48,7 +49,9 @@ const NewChart = ({
 
   const activeStyles={borderBottom: "3px solid #ef7c00", color:"#003D7C"};
   const [activeDecade, setActiveDecade] = React.useState(null);
+  const [currDisplay, setcurrDisplay] = React.useState(0);
 
+  const alignCenter = { display: 'flex', alignItems: 'center' }
   chartData.nodes.map(event => 
     {  
       var currGenres = new Array()
@@ -199,11 +202,11 @@ const NewChart = ({
 
         <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-           New Visualization
+           New Visualization 2
           </h1>
-
-
         </Jumbotron>
+
+
         {/* <InView>
     {({ inView, ref, entry }) => (
       <div ref={ref}>
@@ -215,7 +218,9 @@ const NewChart = ({
         onEnter={}
         onLeave={}
       > */}
-        <Container>
+
+      
+        <Container >
             <PieChart data = {numberPerformanceByGenre}/>
         </Container>
         <Container style={{position:"fixed", zIndex:"1", top:"100px", left:"50px", width:"100px"}}>
@@ -226,129 +231,194 @@ const NewChart = ({
             <p style={activeDecade == "2000s" ? activeStyles : null}>2000-2010</p>
             <p style={activeDecade == "2010s" ? activeStyles : null}>2010-2020</p>
         </Container>
+      <Container  style={{position:"fixed", zIndex:"1", top:"200px", left:"20%", width:"60%"}}>
+        {currDisplay == 1 &&  
+              <Container>
+              <Row>
+                <Col>
+                  <BarGraph data={newData.filter(data => parseInt(data.year) >= 1960 && parseInt(data.year) < 1970)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+                </Col>
+                <Col>
+                  <PieChart data = {numberPerformanceByGenreAndDecades[0]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
+                </Col>
+              </Row>
+              </Container>
+            }
+            {currDisplay == 2 && 
+              <Container>
+              <Row>
+              <Col>
+                <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              </Col>
+              <Col>
+                <PieChart data = {numberPerformanceByGenreAndDecades[1]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
+              </Col>
+            </Row>
+            </Container>
+
+            }
+            {currDisplay == 3  &&           
+              <Container>
+            <Row>
+              <Col>
+                <BarGraph data={newData.filter(data => parseInt(data.year) >= 1980 && parseInt(data.year) < 1990)} color={"#ffa781"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              </Col>
+              <Col>
+                <PieChart data = {numberPerformanceByGenreAndDecades[2]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
+              </Col>
+            </Row>
+            </Container>
+
+            }
+            {currDisplay == 4 &&           
+              <Container>
+            <Row>
+              <Col>
+                <BarGraph data={newData.filter(data => parseInt(data.year) >= 1990 && parseInt(data.year) < 2000)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              </Col>
+              <Col>
+                <PieChart data = {numberPerformanceByGenreAndDecades[3]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
+              </Col>
+            </Row>
+            </Container>
+
+            }
+            {currDisplay==5 &&           
+              <Container>
+            <Row>
+              <Col>
+                <BarGraph data={newData.filter(data => parseInt(data.year) >= 2000 && parseInt(data.year) < 2010)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              </Col>
+              <Col>
+                <PieChart data = {numberPerformanceByGenreAndDecades[4]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
+              </Col>
+            </Row>
+            </Container>
+
+            }
+            {currDisplay == 6 &&           
+              <Container>
+            <Row>
+              <Col>
+                <BarGraph data={newData.filter(data => parseInt(data.year) >= 2010 && parseInt(data.year) < 2020)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              </Col>
+              <Col>
+                <PieChart data = {numberPerformanceByGenreAndDecades[5]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
+              </Col>
+            </Row>
+            </Container>
 
 
+            }
+              
 
-        <VisibilitySensor partialVisibility>
-          {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
-              {({ opacity }) => (<Container style={{ opacity }}>
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-           1960-1970
-          </h1>
-          <Waypoint
-            onEnter={() => setActiveDecade("1960s")}
-          />
-          <Row>
-            <Col>
-              <BarGraph data={newData.filter(data => parseInt(data.year) >= 1960 && parseInt(data.year) < 1970)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            </Col>
-            <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[0]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
-            </Col>
-          </Row>
-        </Container>)}
-
-        </Spring>
-          )}
-        </VisibilitySensor>
+      </Container>
+      {/* <Parallax pages={5} style={{height:"1000px"}}>
+        <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
+          <p className={styles.scrollText}>Scroll down</p>
+        </ParallaxLayer>
 
 
+        <ParallaxLayer sticky={{ start: 1, end: 5 }} style={{ ...alignCenter, justifyContent: 'center' }}>
+            
+        </ParallaxLayer>
+        </Parallax> */}
 
+        <VisibilitySensor partialVisibility style={{height:"1000px"}}>
+            {({ isVisible }) => (
+              <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+                {({ opacity }) => (<Container style={{ opacity }}>
 
-        <VisibilitySensor partialVisibility>
-          {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
-              {({ opacity }) => (<Container style={{ opacity }}>
+            <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <Waypoint
+              onEnter={() => {setActiveDecade("1960s"); setcurrDisplay(1)}}
+              onLeave ={() => {setActiveDecade(null); setcurrDisplay(0)}}
+            />
+            1960-1970
+            </h1>
 
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-           1970-1980
-          </h1>
-          <Waypoint
-            onEnter={() => setActiveDecade("1970s")}
-          />
-          <Row>
-            <Col>
-              <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            </Col>
-            <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[1]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
-            </Col>
-          </Row>
           </Container>)}
 
-        </Spring>
-          )}
-        </VisibilitySensor>
+          </Spring>
+            )}
+          </VisibilitySensor>
 
+          <VisibilitySensor partialVisibility>
+            {({ isVisible }) => (
+              <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+                {({ opacity }) => (<Container style={{ opacity }}>
+
+            <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <Waypoint
+              onEnter={() => {setActiveDecade("1970s"); setcurrDisplay(2)}}
+              onLeave={() => {setActiveDecade("1960s"); setcurrDisplay(1)}}
+            />
+            1970-1980
+            </h1>
+
+            </Container>)}
+          </Spring>
+            )}
+          </VisibilitySensor>
 
         <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
+            <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}>
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
+
+          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <Waypoint
+            onEnter={() => {setActiveDecade("1980s"); setcurrDisplay(3)}}
+            onLeave={() => {setActiveDecade("1970s"); setcurrDisplay(2)}}
+
+          />
            1980-1990
           </h1>
-          <Waypoint
-            onEnter={() => setActiveDecade("1980s")}
-          />
-          <Row>
-            <Col>
-              <BarGraph data={newData.filter(data => parseInt(data.year) >= 1980 && parseInt(data.year) < 1990)} color={"#ffa781"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            </Col>
-            <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[2]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
-            </Col>
-          </Row>
+
+
           </Container>)}
 
         </Spring>
           )}
         </VisibilitySensor>
 
+
         <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
-              {({ opacity }) => (<Container style={{ opacity }}>         
-             <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+              {({ opacity }) => (<Container style={{ opacity }}> 
+
+             <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+             <Waypoint
+            onEnter={() => {setActiveDecade("1990s"); setcurrDisplay(4)}}
+            onLeave={() => {setActiveDecade("1980s"); setcurrDisplay(3)}}
+
+          />        
            1990-2000
           </h1>
-          <Waypoint
-            onEnter={() => setActiveDecade("1990s")}
-          />
-          <Row>
-            <Col>
-              <BarGraph data={newData.filter(data => parseInt(data.year) >= 1990 && parseInt(data.year) < 2000)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            </Col>
-            <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[3]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
-            </Col>
-          </Row>
+
+
           </Container>)}
 
         </Spring>
           )}
         </VisibilitySensor>
 
-
         <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
-              {({ opacity }) => (<Container style={{ opacity }}>         
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+              {({ opacity }) => (<Container style={{ opacity }}>     
+
+
+          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <Waypoint
+            onEnter={() => {setActiveDecade("2000s"); setcurrDisplay(5)}}
+            onLeave={() => {setActiveDecade("1990s"); setcurrDisplay(4)}}
+
+          />    
            2000-2010
           </h1>
-          <Waypoint
-            onEnter={() => setActiveDecade("2000s")}
-          />
-          <Row>
-            <Col>
-              <BarGraph data={newData.filter(data => parseInt(data.year) >= 2000 && parseInt(data.year) < 2010)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            </Col>
-            <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[4]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
-            </Col>
-          </Row>
+
           </Container>)}
 
         </Spring>
@@ -357,37 +427,36 @@ const NewChart = ({
 
         <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
-              {({ opacity }) => (<Container style={{ opacity }}>         
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+              {({ opacity }) => (<Container style={{ opacity }}>      
+
+          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <Waypoint
+            onEnter={() => {setActiveDecade("2010s"); setcurrDisplay(6)}}
+            onLeave={() => {setActiveDecade("2000s"); setcurrDisplay(5)}}
+
+          />   
            2010-2020
           </h1>
-          <Waypoint
-            onEnter={() => setActiveDecade("2010s")}
-          />
-          <Row>
-            <Col>
-              <BarGraph data={newData.filter(data => parseInt(data.year) >= 2010 && parseInt(data.year) < 2020)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-            </Col>
-            <Col>
-              <PieChart data = {numberPerformanceByGenreAndDecades[5]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
-            </Col>
-          </Row>
+
+
           </Container>)}
 
         </Spring>
           )}
         </VisibilitySensor>
+
+
 
         ))
       </Layout>
     );
   };
   
-export default NewChart
+export default NewChart2
 
 export const data = graphql`
-    query newChart{
+    query newChart2{
         page: googleDocs(slug: {eq: "/performance-records"}) {
           name
           description

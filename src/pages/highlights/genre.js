@@ -42,7 +42,7 @@ const Genre = ({
         var currGenres = new Array()
         currGenres = genre.split(";")
         for (var i = 0; i < currGenres.length; i++) {
-          var currGenre = currGenres[i]
+          var currGenre = currGenres[i].trim();
 
           if (!distinct_genres.includes(currGenre)) {
             distinct_genres.push(currGenre);
@@ -103,7 +103,7 @@ const Genre = ({
 
     newData.sort(function(a, b) {
       var keyA = Number(a.year),
-        keyB = Number(a.year);
+        keyB = Number(b.year);
       // Compare the 2 years
       if (keyA < keyB) return -1;
       if (keyA > keyB) return 1;

@@ -11,6 +11,8 @@ import {graphql, useStaticQuery} from "gatsby"
 
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import DropdownSelection from "../../components/DropdownSelection/DropdownSelection.js"
+
 
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -101,14 +103,15 @@ const Organizer = ({
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
           Visualize by Major Organizers
           </h1>
-s        </Jumbotron>
+        </Jumbotron>
 
         <Container>
-        <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
+        {/* <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             {selectedOrganizer} <DownOutlined />
             </a>
-        </Dropdown>
+        </Dropdown> */}
+        <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedOrganizer} current={selectedOrganizer} default="-- Select an Organizer --"/>
 
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
 

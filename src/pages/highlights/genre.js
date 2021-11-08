@@ -120,11 +120,11 @@ const Genre = ({
         </Jumbotron>
 
         <Container>
-        <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
+        {/* <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             {selectedGenre} <DownOutlined />
             </a>
-        </Dropdown>
+        </Dropdown> */}
 
 
         <DropdownSelection data = {distinct_genres} handleClick = {setSelectedGenre} current={selectedGenre} default="-- Select a Genre --"/>

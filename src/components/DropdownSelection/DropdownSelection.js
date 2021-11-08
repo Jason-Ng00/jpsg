@@ -16,9 +16,9 @@ export default function DropdownSelection(props) {
 
     return (
     <Container>
-        <select value={currValue} onChange={handleChange}>
+        <select value={currValue} onChange={handleChange} style={{width:"500px"}}>
             <option value={props.default}>{props.default}</option>
-            {list.map(listItem => {return(<option value={listItem}>{listItem}</option>)})}
+            {list.map(listItem => {return(<option value={listItem} style={{width:"500px"}}>{listItem}</option>)})}
         </select>
 
       </Container>

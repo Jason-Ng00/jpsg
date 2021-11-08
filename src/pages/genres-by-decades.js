@@ -202,7 +202,7 @@ const NewChart2 = ({
 
         <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-           New Visualization 2
+           Genres By Decades
           </h1>
         </Jumbotron>
 
@@ -220,10 +220,10 @@ const NewChart2 = ({
       > */}
 
       
-        <Container >
+        {/* <Container >
             <PieChart data = {numberPerformanceByGenre}/>
-        </Container>
-        <Container style={{position:"fixed", zIndex:"1", top:"100px", left:"50px", width:"100px"}}>
+        </Container> */}
+        <Container style={{position:"fixed", zIndex:"1", top:"300px", left:"50px", width:"100px"}}>
             <p style={activeDecade == "1960s" ? activeStyles : null}>1960-1970</p>
             <p style={activeDecade == "1970s" ? activeStyles : null}>1970-1980</p>
             <p style={activeDecade == "1980s" ? activeStyles : null}>1980-1990</p>
@@ -236,7 +236,14 @@ const NewChart2 = ({
               <Container>
               <Row>
                 <Col>
-                  <BarGraph data={newData.filter(data => parseInt(data.year) >= 1960 && parseInt(data.year) < 1970)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+                  {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1960 && parseInt(data.year) < 1970)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
+                  <h3>What is Lorem Ipsum?</h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+                  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </Col>
                 <Col>
                   <PieChart data = {numberPerformanceByGenreAndDecades[0]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
@@ -248,10 +255,17 @@ const NewChart2 = ({
               <Container>
               <Row>
               <Col>
-                <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+                <PieChart data = {numberPerformanceByGenreAndDecades[1]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
               </Col>
               <Col>
-                <PieChart data = {numberPerformanceByGenreAndDecades[1]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
+              <h3>What is Lorem Ipsum?</h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+                  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
             </Row>
             </Container>
@@ -261,7 +275,17 @@ const NewChart2 = ({
               <Container>
             <Row>
               <Col>
-                <BarGraph data={newData.filter(data => parseInt(data.year) >= 1980 && parseInt(data.year) < 1990)} color={"#ffa781"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              <Col>
+              <h3>What is Lorem Ipsum?</h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+                  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
+              </Col>
+                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1980 && parseInt(data.year) < 1990)} color={"#ffa781"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
               <Col>
                 <PieChart data = {numberPerformanceByGenreAndDecades[2]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
@@ -273,11 +297,19 @@ const NewChart2 = ({
             {currDisplay == 4 &&           
               <Container>
             <Row>
-              <Col>
-                <BarGraph data={newData.filter(data => parseInt(data.year) >= 1990 && parseInt(data.year) < 2000)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-              </Col>
+
               <Col>
                 <PieChart data = {numberPerformanceByGenreAndDecades[3]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
+              </Col>
+              <Col>
+              <h3>What is Lorem Ipsum?</h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+                  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1990 && parseInt(data.year) < 2000)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
             </Row>
             </Container>
@@ -287,7 +319,14 @@ const NewChart2 = ({
               <Container>
             <Row>
               <Col>
-                <BarGraph data={newData.filter(data => parseInt(data.year) >= 2000 && parseInt(data.year) < 2010)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
+              <h3>What is Lorem Ipsum?</h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+                  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 2000 && parseInt(data.year) < 2010)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
               <Col>
                 <PieChart data = {numberPerformanceByGenreAndDecades[4]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
@@ -299,11 +338,19 @@ const NewChart2 = ({
             {currDisplay == 6 &&           
               <Container>
             <Row>
-              <Col>
-                <BarGraph data={newData.filter(data => parseInt(data.year) >= 2010 && parseInt(data.year) < 2020)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/>
-              </Col>
+
               <Col>
                 <PieChart data = {numberPerformanceByGenreAndDecades[5]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
+              </Col>
+              <Col>
+              <h3>What is Lorem Ipsum?</h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                  It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
+                  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 2010 && parseInt(data.year) < 2020)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
             </Row>
             </Container>
@@ -331,10 +378,10 @@ const NewChart2 = ({
 
             <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
-              onEnter={() => {setActiveDecade("1960s"); setcurrDisplay(1)}}
-              onLeave ={() => {setActiveDecade(null); setcurrDisplay(0)}}
+              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1960s"); setcurrDisplay(1)} }}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1970s"); setcurrDisplay(2)} else {setActiveDecade(null); setcurrDisplay(null)}}}
             />
-            1960-1970
+            {/* 1960-1970 */}
             </h1>
 
           </Container>)}
@@ -350,10 +397,10 @@ const NewChart2 = ({
 
             <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
-              onEnter={() => {setActiveDecade("1970s"); setcurrDisplay(2)}}
-              onLeave={() => {setActiveDecade("1960s"); setcurrDisplay(1)}}
+              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1970s"); setcurrDisplay(2)} }}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1980s"); setcurrDisplay(2)} else {setActiveDecade("1960s"); setcurrDisplay(1)}}}
             />
-            1970-1980
+            {/* 1970-1980 */}
             </h1>
 
             </Container>)}
@@ -369,10 +416,10 @@ const NewChart2 = ({
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveDecade("1980s"); setcurrDisplay(3)}}
-            onLeave={() => {setActiveDecade("1970s"); setcurrDisplay(2)}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1990s"); setcurrDisplay(3)} else {setActiveDecade("1970s"); setcurrDisplay(2)}}}
 
           />
-           1980-1990
+           {/* 1980-1990 */}
           </h1>
 
 
@@ -391,10 +438,10 @@ const NewChart2 = ({
              <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
              <Waypoint
             onEnter={() => {setActiveDecade("1990s"); setcurrDisplay(4)}}
-            onLeave={() => {setActiveDecade("1980s"); setcurrDisplay(3)}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2000s"); setcurrDisplay(4)} else {setActiveDecade("1980s"); setcurrDisplay(3)}}}
 
           />        
-           1990-2000
+           {/* 1990-2000 */}
           </h1>
 
 
@@ -413,10 +460,10 @@ const NewChart2 = ({
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveDecade("2000s"); setcurrDisplay(5)}}
-            onLeave={() => {setActiveDecade("1990s"); setcurrDisplay(4)}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2010s"); setcurrDisplay(6)} else {setActiveDecade("1990s"); setcurrDisplay(4)}}}
 
           />    
-           2000-2010
+           {/* 2000-2010 */}
           </h1>
 
           </Container>)}
@@ -433,10 +480,10 @@ const NewChart2 = ({
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveDecade("2010s"); setcurrDisplay(6)}}
-            onLeave={() => {setActiveDecade("2000s"); setcurrDisplay(5)}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2020s"); setcurrDisplay(7)} else {setActiveDecade("2000s"); setcurrDisplay(5)}}}
 
           />   
-           2010-2020
+           {/* 2010-2020 */}
           </h1>
 
 

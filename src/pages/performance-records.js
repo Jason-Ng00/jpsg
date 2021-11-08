@@ -2,6 +2,8 @@ import * as React from "react"
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
 import { useState, useEffect, PureComponent } from 'react';
 import BarGraph from "../components/BarGraph/BarGraph.js"
+import LineGraph from "../components/LineGraph/LineGraph.js"
+
 import EventList from "../components/EventList/EventList.js"
 
 import Layout from "../components/Layout/Layout.js"
@@ -25,7 +27,8 @@ const Page2 = ({
         description,
         childMarkdownRemark: { html },
       },
-      chartData
+      chartData,
+      lineData
     },
   }) => {
     const eventDetails = chartData.nodes;
@@ -49,6 +52,13 @@ const Page2 = ({
           setSelectedeNode(node)
           setSelectedTime(node.Time)
         }
+    }
+
+    const eventByYear = {}
+    for (var i in lineData.nodes) {
+      var curr_event = lineData.nodes[i]
+      // alert(JSON.stringify(curr_event))
+      eventByYear[curr_event["Year"]] = curr_event["Event"]
     }
 
     if (selectedNode && selectedTime) {
@@ -93,10 +103,20 @@ const Page2 = ({
           var year = event.Date.slice(0,4);
           if (!years.includes(year)) {
               years.push(year);
-              newData.push({
+              if (eventByYear[String(year)] != null) {
+                newData.push({
                   year: year,
-                  value: 1
+                  value: 1,
+                  Event: eventByYear[String(year)]
               })
+              } else {
+                newData.push({
+                  year: year,
+                  value: 1,
+                  Event: null
+                })
+              }
+
           } else {
               for(var data of newData) {
                   if(data.year === year) {
@@ -108,7 +128,7 @@ const Page2 = ({
         }
     )
     }
-
+    console.log(newData)
 
     newData.sort(function(a, b) {
       var keyA = Number(a.year),
@@ -134,6 +154,9 @@ const Page2 = ({
         <Container>
 
         <BarGraph data={newData} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
+
+        <LineGraph data={newData} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
+
         <Row>
         <Col>
         <Map className={styles.map} height={500} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
@@ -204,6 +227,15 @@ export const data = graphql`
                 nodes {
                   Genres_concatenated
               }
+          }
+        }
+
+        lineData:allHistoricalContextCsv {
+          nodes {
+            Event
+            Notes
+            Type
+            Year
           }
         }
     }

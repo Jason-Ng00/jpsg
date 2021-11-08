@@ -11,6 +11,8 @@ import {graphql, useStaticQuery} from "gatsby"
 
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import DropdownSelection from "../../components/DropdownSelection/DropdownSelection.js"
+
 
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -105,11 +107,13 @@ const Venue = ({
         </Jumbotron>
 
         <Container>
-        <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
+        {/* <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
             <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             {selectedVenue} <DownOutlined />
             </a>
-        </Dropdown>
+        </Dropdown> */}
+
+        <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedVenue} current={selectedVenue} default="-- Select a Venue --"/>
 
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
 

@@ -101,8 +101,7 @@ export default function NavBar({ location }) {
                 <Link key="Population Trend Mapping" className={styles.navDropdown} to="/highlights/pop" target="_self">Population Trend Mapping</Link>
              </HoverControlledDropdown>
 
-             <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/new-charts">New Chart</Link>
-             <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/new-charts2">New Chart 2</Link>
+             <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/genres-by-decades">Genres By Decades</Link>
             </Nav>
             </Navbar.Collapse>
 

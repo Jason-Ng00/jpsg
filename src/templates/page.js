@@ -5,7 +5,7 @@ import React from "react";
 import "./page.scss"
 import Layout from "../components/Layout/Layout.js";
 import Seo from "../components/seo";
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
+import { Container, Jumbotron } from 'react-bootstrap'
 
 
 const pageFromGDocs = ({

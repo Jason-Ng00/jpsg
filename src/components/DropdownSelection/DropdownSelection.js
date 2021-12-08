@@ -1,8 +1,5 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { useState, useEffect, PureComponent } from 'react';
-
-
 
 export default function DropdownSelection(props) {
     const list = props.data

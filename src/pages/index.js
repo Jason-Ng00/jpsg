@@ -5,7 +5,6 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/Layout/Layout.js"
 import Seo from "../components/seo"
 import EventList from "../components/EventList/EventList.js"
-import BarGraph from "../components/BarGraph/BarGraph.js"
 import data from '../components/EventList/mockdata.json';
 
 const IndexPage = () => (

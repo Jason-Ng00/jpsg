@@ -1,21 +1,13 @@
 import * as React from "react"
-import { useState, useEffect } from 'react';
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { PureComponent } from 'react';
+import { Container, Jumbotron } from 'react-bootstrap'
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
 
 import Layout from "../../components/Layout/Layout.js"
 import Seo from "../../components/seo"
-import {graphql, useStaticQuery} from "gatsby"
+import {graphql} from "gatsby"
 
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import DropdownSelection from "../../components/DropdownSelection/DropdownSelection.js"
-
-
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
 
 const Organizer = ({
     data: {
@@ -29,38 +21,11 @@ const Organizer = ({
 
     const [selectedOrganizer, setSelectedOrganizer] = React.useState("-- Select an Organizer --");
     const [selectedYear, setSelectedYear] = React.useState(null);
-
-    const handleClick = ({key}) => {
-        setSelectedOrganizer(key)
-        if(key == "-- Select an Organizer --") {
-            setSelectedYear(null)
-        }
-    }
-
-    const menu = () => { 
-        const organizers = chartData.distinct
-        return(
-        <Menu onClick={handleClick}>
-          <Menu.Item key="-- Select an Organizer --">
-              -- Select a Organizier --
-          </Menu.Item>
-          {organizers.map(organizer =>  {
-              return(
-            <Menu.Item key={organizer}>
-              {organizer}
-            </Menu.Item>
-              )
-          })
-          }
     
-        </Menu>
-      );
-    }
-    
-    if(selectedOrganizer == "-- Select an Organizer --") {
+    if(selectedOrganizer === "-- Select an Organizer --") {
         eventDetails = chartData.nodes;
     } else {
-        eventDetails = chartData.nodes.filter(event => event.Organizers_concatenated == selectedOrganizer)
+        eventDetails = chartData.nodes.filter(event => event.Organizers_concatenated === selectedOrganizer)
     }
 
     eventDetails.map(event => 
@@ -106,11 +71,7 @@ const Organizer = ({
         </Jumbotron>
 
         <Container>
-        {/* <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
-            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-            {selectedOrganizer} <DownOutlined />
-            </a>
-        </Dropdown> */}
+
         <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedOrganizer} current={selectedOrganizer} default="-- Select an Organizer --"/>
 
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>

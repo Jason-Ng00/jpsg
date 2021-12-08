@@ -1,11 +1,9 @@
-import { prop } from "cheerio/lib/api/attributes";
 import * as React from "react"
-import { useState, useEffect } from 'react';
 import { PieChart, Pie, Sector, Legend,  ResponsiveContainer, Cell} from 'recharts';
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, name, value } = props;
+  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, percent, name, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 10) * cos;
@@ -73,7 +71,7 @@ export default function PieGraph(props) {
     if (i < 6) {
       newData.push(data[i])
     } else {
-      if (newData.length == 6) {
+      if (newData.length === 6) {
         var n = data.length - 6
         newData.push(
           {
@@ -86,16 +84,45 @@ export default function PieGraph(props) {
       }
     }
   }
-  const COLORS =  ['#FF6633', '#FFB399', '#FF33FF', '#00B3E6', 
-		  '#E6B333', '#3366E6', '#999966', '#B34D4D',
-		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-		  '#FF99E6', '#FF1A66', '#E6331A', '#33FFCC',
-		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-		  '#4D8066', '#809980', '#1AFF33', '#999933',
-		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+  // const COLORS =  ['#00a885', '#1abc9c', '#FF33FF', '#00B3E6', 
+	// 	  '#E6B333', '#3366E6', '#999966', '#B34D4D',
+	// 	  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+	// 	  '#FF99E6', '#FF1A66', '#E6331A', '#33FFCC',
+	// 	  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+	// 	  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+	// 	  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+	// 	  '#4D8066', '#809980', '#1AFF33', '#999933',
+	// 	  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+	// 	  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+
+  const COLORS = [
+    "#61bd6d",
+    "#1abc9c",
+    "#fac51c",
+    "#fba026",
+    "#475577",
+    "#28324e",
+    "#f7da64",
+    "#d1d5d8",
+    "#00a885",
+    "#54acd2",
+    "#f37934",
+    "#41a85f",
+    "#b8312f",
+    "#3d8eb9",
+    "#2c82c9",
+    "#2969b0",
+    "#a38f84",
+    "#7c706b",
+    "#eb6b56",
+    "#e25041",
+    "#d14841",
+    "#9365b8",
+    "#553982",
+    "#efefef",
+    "#ccc",
+    "#000000",
+    "#ffffff"]
 
     return (
       <div style={{ width: '100%' }}>

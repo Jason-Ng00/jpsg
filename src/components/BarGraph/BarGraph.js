@@ -1,13 +1,12 @@
 import * as React from "react"
-import { useState, useEffect } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function BarGraph(props) { 
 
   const [activeIndex, setActiveIndex] = React.useState(null);
   
   const handleClick = (data, index) => {
-    if(props.click && index != activeIndex) {
+    if(props.click && index !== activeIndex) {
       setActiveIndex(index);
       props.click(props.data[index].year)
     } else if (props.click) {

@@ -1,20 +1,16 @@
 import * as React from "react"
-import { useState, useEffect } from 'react';
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { PureComponent } from 'react';
+
+import { Container, Jumbotron } from 'react-bootstrap'
+
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
 
 import Layout from "../../components/Layout/Layout.js"
 import Seo from "../../components/seo"
-import {graphql, useStaticQuery} from "gatsby"
+import {graphql} from "gatsby"
 
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import DropdownSelection from "../../components/DropdownSelection/DropdownSelection.js"
 
-
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 const Venue = ({
@@ -29,38 +25,11 @@ const Venue = ({
 
     const [selectedVenue, setSelectedVenue] = React.useState("-- Select a Venue --");
     const [selectedYear, setSelectedYear] = React.useState(null);
-
-    const handleClick = ({key}) => {
-        setSelectedVenue(key)
-        if(key == "-- Select a Venue --") {
-            setSelectedYear(null)
-        }
-    }
-
-    const menu = () => { 
-        const venues = chartData.distinct
-        return(
-        <Menu onClick={handleClick}>
-          <Menu.Item key="-- Select a Venue --">
-              -- Select a Venue --
-          </Menu.Item>
-          {venues.map(venue =>  {
-              return(
-            <Menu.Item key={venue}>
-              {venue}
-            </Menu.Item>
-              )
-          })
-          }
     
-        </Menu>
-      );
-    }
-    
-    if(selectedVenue == "-- Select a Venue --") {
+    if(selectedVenue === "-- Select a Venue --") {
         eventDetails = chartData.nodes;
     } else {
-        eventDetails = chartData.nodes.filter(event => event.Venue_concatenated == selectedVenue)
+        eventDetails = chartData.nodes.filter(event => event.Venue_concatenated === selectedVenue)
     }
 
     eventDetails.map(event => 
@@ -107,11 +76,6 @@ const Venue = ({
         </Jumbotron>
 
         <Container>
-        {/* <Dropdown overlay={menu} onChange={(value) => {alert(value)}} trigger={['click']}>
-            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-            {selectedVenue} <DownOutlined />
-            </a>
-        </Dropdown> */}
 
         <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedVenue} current={selectedVenue} default="-- Select a Venue --"/>
 

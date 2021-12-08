@@ -1,15 +1,12 @@
 import * as React from "react"
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { PureComponent } from 'react';
+import { Container, Jumbotron } from 'react-bootstrap'
 import BarGraph from "../../components/BarGraph/BarGraph.js"
-import EventList from "../../components/EventList/EventList.js"
 
 import Layout from "../../components/Layout/Layout.js"
 import Seo from "../../components/seo"
-import {graphql, useStaticQuery} from "gatsby"
+import {graphql} from "gatsby"
 
 
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Pop = ({
     data: {
@@ -22,7 +19,6 @@ const Pop = ({
       chartData
     },
   }) => {
-    const eventDetails = chartData.nodes;
     const pageTitle = name.split("_").pop();
     const years=[];
     const newData = [];

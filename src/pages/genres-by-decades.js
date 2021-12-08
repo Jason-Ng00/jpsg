@@ -1,23 +1,19 @@
 import * as React from "react"
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { useState, useEffect, PureComponent } from 'react';
+import { useState } from 'react';
 import PieChart from "../components/PieChart/PieChart.js"
-import BarGraph from "../components/BarGraph/BarGraph.js"
 
 import Layout from "../components/Layout/Layout.js"
-import Seo from "../components/seo"
-import {graphql, useStaticQuery} from "gatsby"
+import {graphql} from "gatsby"
 
 import { Waypoint } from 'react-waypoint';
-import { useInView, InView } from 'react-intersection-observer';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
-import { useSprings, animated, config } from "react-spring";
+
+import { useSprings, config } from "react-spring";
 import { Spring } from "react-spring/renderprops";
 import VisibilitySensor from "react-visibility-sensor";
-import { motion, useAnimation } from "framer-motion";
-import * as styles from './styles.module.css'
 
-const NewChart2 = ({
+
+const GenresByDecades = ({
     data: {
       page: {
         name,
@@ -48,10 +44,12 @@ const NewChart2 = ({
   const newData = [];
 
   const activeStyles={borderBottom: "3px solid #ef7c00", color:"#003D7C"};
-  const [activeDecade, setActiveDecade] = React.useState(null);
-  const [currDisplay, setcurrDisplay] = React.useState(0);
-
+  const [activeDecade, setActiveDecade] = React.useState("1960s");
+  const [atTop, setAtTop] = React.useState(true)
+  const atTopStyle = {position:"unset", zIndex:"1", backgroundColor:"#efefef"}
+  const notAtTopStyle = {position:"fixed", zIndex:"1", top:"0",backgroundColor:"#efefef",transform: "translate(calc(50vw - 50%), calc(50vh - 50%))"}
   const alignCenter = { display: 'flex', alignItems: 'center' }
+
   chartData.nodes.map(event => 
     {  
       var currGenres = new Array()
@@ -207,36 +205,19 @@ const NewChart2 = ({
         </Jumbotron>
 
 
-        {/* <InView>
-    {({ inView, ref, entry }) => (
-      <div ref={ref}>
-        <h2>{`Header inside viewport ${inView}.`}</h2>
-      </div>
-    )}
-  </InView> */}
-        {/* <Waypoint
-        onEnter={}
-        onLeave={}
-      > */}
-
-      
-        {/* <Container >
-            <PieChart data = {numberPerformanceByGenre}/>
-        </Container> */}
         <Container style={{position:"fixed", zIndex:"1", top:"300px", left:"50px", width:"100px"}}>
-            <p style={activeDecade == "1960s" ? activeStyles : null}>1960-1970</p>
-            <p style={activeDecade == "1970s" ? activeStyles : null}>1970-1980</p>
-            <p style={activeDecade == "1980s" ? activeStyles : null}>1980-1990</p>
-            <p style={activeDecade == "1990s" ? activeStyles : null}>1990-2000</p>
-            <p style={activeDecade == "2000s" ? activeStyles : null}>2000-2010</p>
-            <p style={activeDecade == "2010s" ? activeStyles : null}>2010-2020</p>
+            <p style={activeDecade === "1960s" ? activeStyles : null}>1960-1970</p>
+            <p style={activeDecade === "1970s" ? activeStyles : null}>1970-1980</p>
+            <p style={activeDecade === "1980s" ? activeStyles : null}>1980-1990</p>
+            <p style={activeDecade === "1990s" ? activeStyles : null}>1990-2000</p>
+            <p style={activeDecade === "2000s" ? activeStyles : null}>2000-2010</p>
+            <p style={activeDecade === "2010s" ? activeStyles : null}>2010-2020</p>
         </Container>
-      <Container  style={{position:"fixed", zIndex:"1", top:"200px", left:"20%", width:"60%"}}>
-        {currDisplay == 1 &&  
+      <Container  style={atTop ? atTopStyle : notAtTopStyle}>
+        {activeDecade === "1960s" &&  
               <Container>
               <Row>
                 <Col>
-                  {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1960 && parseInt(data.year) < 1970)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
                   <h3>What is Lorem Ipsum?</h3>
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                   Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -251,7 +232,7 @@ const NewChart2 = ({
               </Row>
               </Container>
             }
-            {currDisplay == 2 && 
+            {activeDecade === "1970s" && 
               <Container>
               <Row>
               <Col>
@@ -265,13 +246,12 @@ const NewChart2 = ({
                   It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
                   desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
             </Row>
             </Container>
 
             }
-            {currDisplay == 3  &&           
+            {activeDecade === "1980s"  &&           
               <Container>
             <Row>
               <Col>
@@ -283,9 +263,7 @@ const NewChart2 = ({
                   It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
                   desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1970 && parseInt(data.year) < 1980)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
-                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1980 && parseInt(data.year) < 1990)} color={"#ffa781"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
               <Col>
                 <PieChart data = {numberPerformanceByGenreAndDecades[2]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
@@ -294,7 +272,7 @@ const NewChart2 = ({
             </Container>
 
             }
-            {currDisplay == 4 &&           
+            {activeDecade === "1990s" &&           
               <Container>
             <Row>
 
@@ -309,13 +287,12 @@ const NewChart2 = ({
                   It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
                   desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 1990 && parseInt(data.year) < 2000)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
             </Row>
             </Container>
 
             }
-            {currDisplay==5 &&           
+            {activeDecade === "2000s" &&           
               <Container>
             <Row>
               <Col>
@@ -326,7 +303,6 @@ const NewChart2 = ({
                   It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
                   desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 2000 && parseInt(data.year) < 2010)} color={"#2210070"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
               <Col>
                 <PieChart data = {numberPerformanceByGenreAndDecades[4]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
@@ -335,7 +311,7 @@ const NewChart2 = ({
             </Container>
 
             }
-            {currDisplay == 6 &&           
+            {activeDecade === "2010s" &&           
               <Container>
             <Row>
 
@@ -350,7 +326,6 @@ const NewChart2 = ({
                   It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                   It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
                   desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                {/* <BarGraph data={newData.filter(data => parseInt(data.year) >= 2010 && parseInt(data.year) < 2020)} color={"#f4b41a"} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"}/> */}
               </Col>
             </Row>
             </Container>
@@ -360,28 +335,18 @@ const NewChart2 = ({
               
 
       </Container>
-      {/* <Parallax pages={5} style={{height:"1000px"}}>
-        <ParallaxLayer offset={0} speed={0.5} style={{ ...alignCenter, justifyContent: 'center' }}>
-          <p className={styles.scrollText}>Scroll down</p>
-        </ParallaxLayer>
 
 
-        <ParallaxLayer sticky={{ start: 1, end: 5 }} style={{ ...alignCenter, justifyContent: 'center' }}>
-            
-        </ParallaxLayer>
-        </Parallax> */}
-
-        <VisibilitySensor partialVisibility style={{height:"1000px"}}>
+        <VisibilitySensor style={{height:"1000px"}}>
             {({ isVisible }) => (
               <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
                 {({ opacity }) => (<Container style={{ opacity }}>
 
-            <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
-              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1960s"); setcurrDisplay(1)} }}
-              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1970s"); setcurrDisplay(2)} else {setActiveDecade(null); setcurrDisplay(null)}}}
+              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1960s")} }}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1970s");setAtTop(false)} else {setAtTop(true)}}}
             />
-            {/* 1960-1970 */}
             </h1>
 
           </Container>)}
@@ -395,12 +360,11 @@ const NewChart2 = ({
               <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
                 {({ opacity }) => (<Container style={{ opacity }}>
 
-            <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
-              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1970s"); setcurrDisplay(2)} }}
-              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1980s"); setcurrDisplay(2)} else {setActiveDecade("1960s"); setcurrDisplay(1)}}}
+              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1970s")} }}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1980s")} else {setActiveDecade("1960s")}}}
             />
-            {/* 1970-1980 */}
             </h1>
 
             </Container>)}
@@ -413,13 +377,12 @@ const NewChart2 = ({
             <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}>
 
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
-            onEnter={() => {setActiveDecade("1980s"); setcurrDisplay(3)}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1990s"); setcurrDisplay(3)} else {setActiveDecade("1970s"); setcurrDisplay(2)}}}
+            onEnter={() => {setActiveDecade("1980s")}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1990s")} else {setActiveDecade("1970s")}}}
 
           />
-           {/* 1980-1990 */}
           </h1>
 
 
@@ -435,13 +398,12 @@ const NewChart2 = ({
             <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}> 
 
-             <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+             <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
              <Waypoint
-            onEnter={() => {setActiveDecade("1990s"); setcurrDisplay(4)}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2000s"); setcurrDisplay(4)} else {setActiveDecade("1980s"); setcurrDisplay(3)}}}
+            onEnter={() => {setActiveDecade("1990s")}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2000s")} else {setActiveDecade("1980s")}}}
 
           />        
-           {/* 1990-2000 */}
           </h1>
 
 
@@ -457,13 +419,12 @@ const NewChart2 = ({
               {({ opacity }) => (<Container style={{ opacity }}>     
 
 
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
-            onEnter={() => {setActiveDecade("2000s"); setcurrDisplay(5)}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2010s"); setcurrDisplay(6)} else {setActiveDecade("1990s"); setcurrDisplay(4)}}}
+            onEnter={() => {setActiveDecade("2000s")}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2010s")} else {setActiveDecade("1990s")}}}
 
           />    
-           {/* 2000-2010 */}
           </h1>
 
           </Container>)}
@@ -477,13 +438,12 @@ const NewChart2 = ({
             <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}>      
 
-          <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
-            onEnter={() => {setActiveDecade("2010s"); setcurrDisplay(6)}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2020s"); setcurrDisplay(7)} else {setActiveDecade("2000s"); setcurrDisplay(5)}}}
+            onEnter={() => {setActiveDecade("2010s")}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2020s")} else {setActiveDecade("2000s")}}}
 
           />   
-           {/* 2010-2020 */}
           </h1>
 
 
@@ -500,7 +460,7 @@ const NewChart2 = ({
     );
   };
   
-export default NewChart2
+export default GenresByDecades
 
 export const data = graphql`
     query newChart2{

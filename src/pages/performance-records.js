@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { useState, useEffect, PureComponent } from 'react';
+import { useEffect } from 'react';
 import BarGraph from "../components/BarGraph/BarGraph.js"
 import LineGraph from "../components/LineGraph/LineGraph.js"
 
@@ -8,13 +8,7 @@ import EventList from "../components/EventList/EventList.js"
 
 import Layout from "../components/Layout/Layout.js"
 import Seo from "../components/seo"
-import {graphql, useStaticQuery} from "gatsby"
-import {MDXRenderer} from "gatsby-plugin-mdx"
-import ReactPaginate from 'react-paginate';
-import data11 from '../components/EventList/mockdata.json';
-
-
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {graphql} from "gatsby"
 
 import { Map, Marker } from "pigeon-maps"
 import * as styles from './performance-records.scss'
@@ -57,13 +51,12 @@ const Page2 = ({
     const eventByYear = {}
     for (var i in lineData.nodes) {
       var curr_event = lineData.nodes[i]
-      // alert(JSON.stringify(curr_event))
       eventByYear[curr_event["Year"]] = curr_event["Event"]
     }
 
     if (selectedNode && selectedTime) {
       eventDetails.map(event => 
-        {   if (event == selectedNode && event.Time == selectedTime) {
+        {   if (event === selectedNode && event.Time === selectedTime) {
               eventList.push(event)
             }
             if (selectedYear && event.Date.slice(0,4) === selectedYear) {
@@ -153,16 +146,12 @@ const Page2 = ({
       </Container>
         <Container>
 
-        <BarGraph data={newData} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
-
         <LineGraph data={newData} title={"Number of Performances"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
 
         <Row>
         <Col>
         <Map className={styles.map} height={500} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
 
-        {/* <Marker width={50} anchor={[parseFloat(eventList[6].Latitude), parseFloat(eventList[6].Longtitude)]} />  */}
-        {/* {alert(JSON.stringify(eventList[6].Latitude))} */}
         {mapData.map(node => {
           const lat = node.Latitude ? parseFloat(node.Latitude) : null
           const long = node.Longtitude ? parseFloat(node.Longtitude) : null
@@ -174,9 +163,9 @@ const Page2 = ({
 
         </Map>
         </Col>
-        <Col>
+
         <EventList className={styles.eventlist} data={eventList} attribute={["Performance_Title","Genres_concatenated","Time"]}></EventList>
-        </Col>
+
         </Row>
 
 

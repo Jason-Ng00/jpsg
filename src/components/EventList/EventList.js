@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import Pagination from '../Pagination/Pagination.js';
 import './EventList.scss';
 

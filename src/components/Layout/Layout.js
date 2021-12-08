@@ -11,9 +11,7 @@
 
 import * as React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 
-import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "../Header/Header.js"
 import Navbar from "../Navbar/Navbar.js"
@@ -22,9 +20,6 @@ import * as styles from "./Layout.module.scss"
 
 import { motion } from "framer-motion"
 import { Container } from 'react-bootstrap'
-import { MDXProvider } from "@mdx-js/react"
-
-
 
 const Layout = ({ children }) => {
   return (

@@ -1,14 +1,14 @@
 import * as React from "react"
 import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import DefaultTooltipContent from 'recharts/lib/component/DefaultTooltipContent';
-
 
 export default function LineGraph(props) { 
 
   const [activeIndex, setActiveIndex] = React.useState(null);
   
-  const handleClick = (data, index) => {
+  const handleClick = (data, event) => {
+    const index = event.index
+    const payload = event.payload
     if(props.click && index != activeIndex) {
       setActiveIndex(index);
       props.click(props.data[index].year)
@@ -36,9 +36,9 @@ export default function LineGraph(props) {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={props.xaxis} label={{ value: props.xaxis, position: 'insideBottomRight', offset: 0 }}/>
           <YAxis label={{ value: props.yaxisName ? props.yaxisName : props.yaxis, angle: -90}} />
-          <Tooltip/>
+          <Tooltip content = {<CustomTooltip />}/>
           <Legend />
-          <Line type="monotone" dataKey={props.yaxis} stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey={props.yaxis} stroke="#8884d8" activeDot={{ onClick:handleClick }} />
           </LineChart>
         </ResponsiveContainer>
 
@@ -49,14 +49,15 @@ export default function LineGraph(props) {
 
 
 const CustomTooltip = ({ active, payload, label }) => {
-  alert(payload)
-  if (active) {
+  if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <p className="label">{`${label} : ${payload[0].event}`}</p>
-        <p className="intro">${payload}</p>
+      <div className="custom-tooltip" style={{backgroundColor:"#fff", outline:"2px solid #ADD8E6", padding:"10px"}}>
+        <p className="label">{`${label} : ${payload[0].value}`}</p>
+        <p className="label">{JSON.stringify(payload)}</p>
+        <p className="desc">Anything you want can be displayed here.</p>
       </div>
     );
   }
+
   return null;
 };

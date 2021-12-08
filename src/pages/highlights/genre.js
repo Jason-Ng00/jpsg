@@ -1,20 +1,15 @@
 import * as React from "react"
-import { useState, useEffect } from 'react';
-import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { PureComponent } from 'react';
+import { Container, Jumbotron } from 'react-bootstrap'
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
 
 import Layout from "../../components/Layout/Layout.js"
 import Seo from "../../components/seo"
-import {graphql, useStaticQuery} from "gatsby"
+import {graphql} from "gatsby"
 
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 
-import DropdownSelection from "../../components/DropdownSelection/DropdownSelection.js"
+import DropdownSelection from"../../components/DropdownSelection/DropdownSelection.js"
 
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 const Genre = ({
@@ -30,16 +25,10 @@ const Genre = ({
     const [selectedGenre, setSelectedGenre] = React.useState("-- Select a Genre --");
     const [selectedYear, setSelectedYear] = React.useState(null);
 
-    const handleClick = ({key}) => {
-        setSelectedGenre(key)
-        if(key == "-- Select a Genre --") {
-            setSelectedYear(null)
-        }
-    }
     const genres = chartData.distinct
     const distinct_genres = []
     genres.map(genre => {
-        var currGenres = new Array()
+        var currGenres = []
         currGenres = genre.split(";")
         for (var i = 0; i < currGenres.length; i++) {
           var currGenre = currGenres[i].trim();
@@ -48,29 +37,12 @@ const Genre = ({
             distinct_genres.push(currGenre);
         }
       }
+      return genre
     }
     )
-    const menu = () => { 
 
-        return(
-        <Menu onClick={handleClick}>
-          <Menu.Item key="-- Select a Genre --">
-              -- Select a Genre --
-          </Menu.Item>
-          {distinct_genres.map(genre =>  {
-              return(
-            <Menu.Item key={genre}>
-              {genre}
-            </Menu.Item>
-              )
-          })
-          }
     
-        </Menu>
-      );
-    }
-    
-    if(selectedGenre == "-- Select a Genre --") {
+    if(selectedGenre === "-- Select a Genre --") {
         eventDetails = chartData.nodes;
     } else {
         eventDetails = chartData.nodes.filter(event => event.Genres_concatenated.includes(selectedGenre))

@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { useState } from 'react';
 import PieChart from "../components/PieChart/PieChart.js"
 
 import Layout from "../components/Layout/Layout.js"
@@ -8,7 +7,6 @@ import {graphql} from "gatsby"
 
 import { Waypoint } from 'react-waypoint';
 
-import { useSprings, config } from "react-spring";
 import { Spring } from "react-spring/renderprops";
 import VisibilitySensor from "react-visibility-sensor";
 
@@ -24,17 +22,6 @@ const GenresByDecades = ({
       chartData
     },
   }) => {
-  
-  const [shownarr, setShownArr] = useState([true, false, false, false, false]);
-  const springs = useSprings(
-    shownarr.length,
-    shownarr.map(shown => ({
-      opacity: shown ? 1 : 0,
-      transform: shown ? "translateY(0px)" : "translateY(50px)",
-      config: config.molasses
-    }))
-  );
-
     
   const numberPerformanceByGenre =[];
   const genres = []
@@ -48,11 +35,10 @@ const GenresByDecades = ({
   const [atTop, setAtTop] = React.useState(true)
   const atTopStyle = {position:"unset", zIndex:"1", backgroundColor:"#efefef"}
   const notAtTopStyle = {position:"fixed", zIndex:"1", top:"0",backgroundColor:"#efefef",transform: "translate(calc(50vw - 50%), calc(50vh - 50%))"}
-  const alignCenter = { display: 'flex', alignItems: 'center' }
 
   chartData.nodes.map(event => 
     {  
-      var currGenres = new Array()
+      var currGenres = []
       currGenres = event.Genres_concatenated.split(";")
 
       for (var i = 0; i < currGenres.length; i++) {
@@ -71,7 +57,6 @@ const GenresByDecades = ({
             }
         }
       }
-      console.log(numberPerformanceByGenre)
       var year = event.Date.slice(0,4);
       if (!years.includes(year)) {
           years.push(year);
@@ -80,7 +65,7 @@ const GenresByDecades = ({
               value: 1
           })
       } else {
-          for(var data of newData) {
+          for(data of newData) {
               if(data.year === year) {
                   data.value += 1
               }  
@@ -89,8 +74,8 @@ const GenresByDecades = ({
 
 
       if (parseInt(year) >= 1960 && parseInt(year) < 1970) {
-        for (var i = 0; i < currGenres.length; i++) {
-            var genre = currGenres[i]
+        for (i = 0; i < currGenres.length; i++) {
+            genre = currGenres[i]
             if (!genresByDecade[0].includes(genre)) {
               genresByDecade[0].push(genre);
               numberPerformanceByGenreAndDecades[0].push({
@@ -98,7 +83,7 @@ const GenresByDecades = ({
                   value: 1
               })
           } else {
-              for(var data of numberPerformanceByGenreAndDecades[0]) {
+              for(data of numberPerformanceByGenreAndDecades[0]) {
                   if(data.name === genre) {
                       data.value += 1
                   }  
@@ -106,8 +91,8 @@ const GenresByDecades = ({
           }
         }
       } else if (parseInt(year) >= 1970 && parseInt(year) < 1980) {
-        for (var i = 0; i < currGenres.length; i++) {
-           var genre = currGenres[i]
+        for (i = 0; i < currGenres.length; i++) {
+           genre = currGenres[i]
             if (!genresByDecade[1].includes(genre)) {
               genresByDecade[1].push(genre);
               numberPerformanceByGenreAndDecades[1].push({
@@ -115,7 +100,7 @@ const GenresByDecades = ({
                   value: 1
               })
           } else {
-              for(var data of numberPerformanceByGenreAndDecades[1]) {
+              for(data of numberPerformanceByGenreAndDecades[1]) {
                   if(data.name === genre) {
                       data.value += 1
                   }  
@@ -123,8 +108,8 @@ const GenresByDecades = ({
           }
         }
       } else if (parseInt(year) >= 1980 && parseInt(year) < 1990) {
-        for (var i = 0; i < currGenres.length; i++) {
-           var genre = currGenres[i]
+        for (i = 0; i < currGenres.length; i++) {
+           genre = currGenres[i]
             if (!genresByDecade[2].includes(genre)) {
               genresByDecade[2].push(genre);
               numberPerformanceByGenreAndDecades[2].push({
@@ -132,7 +117,7 @@ const GenresByDecades = ({
                   value: 1
               })
           } else {
-              for(var data of numberPerformanceByGenreAndDecades[2]) {
+              for(data of numberPerformanceByGenreAndDecades[2]) {
                   if(data.name === genre) {
                       data.value += 1
                   }  
@@ -140,8 +125,8 @@ const GenresByDecades = ({
           }
         }
       } else if (parseInt(year) >= 1990 && parseInt(year) < 2000) {
-        for (var i = 0; i < currGenres.length; i++) {
-           var genre = currGenres[i]
+        for (i = 0; i < currGenres.length; i++) {
+           genre = currGenres[i]
             if (!genresByDecade[3].includes(genre)) {
               genresByDecade[3].push(genre);
               numberPerformanceByGenreAndDecades[3].push({
@@ -149,7 +134,7 @@ const GenresByDecades = ({
                   value: 1
               })
           } else {
-              for(var data of numberPerformanceByGenreAndDecades[3]) {
+              for(data of numberPerformanceByGenreAndDecades[3]) {
                   if(data.name === genre) {
                       data.value += 1
                   }  
@@ -157,8 +142,8 @@ const GenresByDecades = ({
           }
         }
       } else if (parseInt(year) >= 2000 && parseInt(year) < 2010) {
-        for (var i = 0; i < currGenres.length; i++) {
-            var genre = currGenres[i]
+        for (i = 0; i < currGenres.length; i++) {
+            genre = currGenres[i]
             if (!genresByDecade[4].includes(genre)) {
               genresByDecade[4].push(genre);
               numberPerformanceByGenreAndDecades[4].push({
@@ -166,7 +151,7 @@ const GenresByDecades = ({
                   value: 1
               })
           } else {
-              for(var data of numberPerformanceByGenreAndDecades[4]) {
+              for(data of numberPerformanceByGenreAndDecades[4]) {
                   if(data.name === genre) {
                       data.value += 1
                   }  
@@ -174,8 +159,8 @@ const GenresByDecades = ({
           }
         }
       } else if (parseInt(year) >= 2010 && parseInt(year) < 2020) {
-        for (var i = 0; i < currGenres.length; i++) {
-            var genre = currGenres[i]
+        for (i = 0; i < currGenres.length; i++) {
+            genre = currGenres[i]
             if (!genresByDecade[5].includes(genre)) {
               genresByDecade[5].push(genre);
               numberPerformanceByGenreAndDecades[5].push({
@@ -183,7 +168,7 @@ const GenresByDecades = ({
                   value: 1
               })
           } else {
-              for(var data of numberPerformanceByGenreAndDecades[5]) {
+              for(data of numberPerformanceByGenreAndDecades[5]) {
                   if(data.name === genre) {
                       data.value += 1
                   }  
@@ -345,7 +330,7 @@ const GenresByDecades = ({
             <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
               onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1960s")} }}
-              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1970s");setAtTop(false)} else {setAtTop(true)}}}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveDecade("1970s");setAtTop(false)} else {setAtTop(true)}}}
             />
             </h1>
 
@@ -363,7 +348,7 @@ const GenresByDecades = ({
             <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
               onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveDecade("1970s")} }}
-              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1980s")} else {setActiveDecade("1960s")}}}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveDecade("1980s")} else {setActiveDecade("1960s")}}}
             />
             </h1>
 
@@ -380,7 +365,7 @@ const GenresByDecades = ({
           <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveDecade("1980s")}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("1990s")} else {setActiveDecade("1970s")}}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveDecade("1990s")} else {setActiveDecade("1970s")}}}
 
           />
           </h1>
@@ -401,7 +386,7 @@ const GenresByDecades = ({
              <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
              <Waypoint
             onEnter={() => {setActiveDecade("1990s")}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2000s")} else {setActiveDecade("1980s")}}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveDecade("2000s")} else {setActiveDecade("1980s")}}}
 
           />        
           </h1>
@@ -422,7 +407,7 @@ const GenresByDecades = ({
           <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveDecade("2000s")}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2010s")} else {setActiveDecade("1990s")}}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveDecade("2010s")} else {setActiveDecade("1990s")}}}
 
           />    
           </h1>
@@ -441,7 +426,7 @@ const GenresByDecades = ({
           <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveDecade("2010s")}}
-            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition == "above") {setActiveDecade("2020s")} else {setActiveDecade("2000s")}}}
+            onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveDecade("2020s")} else {setActiveDecade("2000s")}}}
 
           />   
           </h1>

@@ -17,7 +17,6 @@ export default function BarGraph(props) {
   };
   const data = props.data
 
-  const activeItem = data[activeIndex];
     return (
       <div style={{ width: '100%' }}>
         <div>{props.title}</div>

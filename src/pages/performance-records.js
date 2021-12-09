@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
 import { useEffect } from 'react';
-import BarGraph from "../components/BarGraph/BarGraph.js"
 import LineGraph from "../components/LineGraph/LineGraph.js"
 
 import EventList from "../components/EventList/EventList.js"

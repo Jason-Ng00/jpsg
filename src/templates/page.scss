@@ -10,6 +10,13 @@ table {
         }
     }
 
+    tr:nth-child(even)   { background-color:#fff; }
+    tr:nth-child(odd)    { background-color:#eee; }
+
+    td {
+        padding:10px;
+    }
+
     tbody {
         tr:nth-child(even)   { background-color:#eee; }
         tr:nth-child(odd)    { background-color:#fff; }
@@ -27,3 +34,4 @@ strong {
 p {
     margin-bottom:20px;
 }
+

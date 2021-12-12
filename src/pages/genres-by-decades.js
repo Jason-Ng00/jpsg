@@ -33,8 +33,8 @@ const GenresByDecades = ({
   const activeStyles={borderBottom: "3px solid #ef7c00", color:"#003D7C"};
   const [activeDecade, setActiveDecade] = React.useState("1960s");
   const [atTop, setAtTop] = React.useState(true)
-  const atTopStyle = {position:"unset", zIndex:"1", backgroundColor:"#efefef"}
-  const notAtTopStyle = {position:"fixed", zIndex:"1", top:"0",backgroundColor:"#efefef",transform: "translate(calc(50vw - 50%), calc(50vh - 50%))"}
+  const atTopStyle = {position:"unset", zIndex:"1"}
+  const notAtTopStyle = {position:"fixed", zIndex:"1", top:"0",transform: "translate(calc(50vw - 50%), calc(50vh - 50%))"}
 
   chartData.nodes.map(event => 
     {  

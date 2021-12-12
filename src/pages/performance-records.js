@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Container, Row, Col, Jumbotron } from 'react-bootstrap'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import LineGraph from "../components/LineGraph/LineGraph.js"
 
 import EventList from "../components/EventList/EventList.js"
@@ -9,8 +9,8 @@ import Layout from "../components/Layout/Layout.js"
 import Seo from "../components/seo"
 import {graphql} from "gatsby"
 
-import { Map, Marker } from "pigeon-maps"
-import * as styles from './performance-records.scss'
+import { Map, Marker, Draggable } from "pigeon-maps"
+import * as styles from './performance-records.module.scss'
 
 const Page2 = ({
     data: {
@@ -34,6 +34,7 @@ const Page2 = ({
     const [selectedNode, setSelectedeNode] = React.useState(null);
     
     const [selectedTime, setSelectedTime] = React.useState(null);
+    const [anchor, setAnchor] = useState([1.3521, 103.8198]);
     
     useEffect(() => {},[selectedTime, selectedNode])
 
@@ -41,10 +42,13 @@ const Page2 = ({
         if (selectedNode === node && selectedTime === node.Time) {
           setSelectedTime(null)
           setSelectedeNode(null)
+          setAnchor([1.3521, 103.8198])
         } else {
           setSelectedeNode(node)
           setSelectedTime(node.Time)
+          setAnchor([parseFloat(node.Latitude), parseFloat(node.Longtitude)])
         }
+
     }
 
     const eventByYear = {}
@@ -151,12 +155,27 @@ const Page2 = ({
         <Col>
         <Map className={styles.map} height={500} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
 
+          {selectedNode != null && 
+            <Draggable offset={[-150, 100]} anchor={anchor} onDragEnd={setAnchor}>
+              <Container className = {styles.popup}>
+                <p className = {styles.popupBox}>Drag and Drop</p>
+                <p className = {styles.popupTitle}>Performace Title: </p>
+                <p>{selectedNode.Performance_Title}</p>
+                <p className = {styles.popupTitle}>Genre: </p> 
+                <p>{selectedNode.Genres_concatenated}</p>
+                <p className = {styles.popupTitle}>Time: </p>
+                <p>{selectedNode.Time}</p>
+                
+              </Container>
+            </Draggable>
+          }
+
         {mapData.map(node => {
           const lat = node.Latitude ? parseFloat(node.Latitude) : null
           const long = node.Longtitude ? parseFloat(node.Longtitude) : null
 
           return (
-            <Marker width={50} anchor={[lat, long]} onClick={() => {handleClickMap(node)} }/> 
+            <Marker className = {styles.marker} width={50} anchor={[lat, long]} onClick={() => {handleClickMap(node)} } />
           );
         })}
 
@@ -165,11 +184,7 @@ const Page2 = ({
 
         <EventList className={styles.eventlist} data={eventList} attribute={["Performance_Title","Genres_concatenated","Time"]}></EventList>
 
-        </Row>
-
-
-
-            
+        </Row> 
         </Container>
 
       </Layout>

@@ -22,10 +22,26 @@ const Organizer = ({
     const [selectedOrganizer, setSelectedOrganizer] = React.useState("-- Select an Organizer --");
     const [selectedYear, setSelectedYear] = React.useState(null);
     
+    const organizers = chartData.distinct
+    const distinct_organizers = []
+    organizers.map(organizer => {
+        var curr_organizers = []
+        curr_organizers = organizer.split(";")
+        for (var i = 0; i < curr_organizers.length; i++) {
+          var curr_organizer = curr_organizers[i].trim();
+
+          if (!distinct_organizers.includes(curr_organizer)) {
+            distinct_organizers.push(curr_organizer);
+        }
+      }
+      return organizers
+    }
+    )
+
     if(selectedOrganizer === "-- Select an Organizer --") {
         eventDetails = chartData.nodes;
     } else {
-        eventDetails = chartData.nodes.filter(event => event.Organizers_concatenated === selectedOrganizer)
+        eventDetails = chartData.nodes.filter(event => event.Organizers_concatenated.includes(selectedOrganizer))
     }
 
     eventDetails.map(event => 
@@ -72,7 +88,7 @@ const Organizer = ({
 
         <Container>
 
-        <DropdownSelection data = {chartData.distinct} handleClick = {setSelectedOrganizer} current={selectedOrganizer} default="-- Select an Organizer --"/>
+        <DropdownSelection data = {distinct_organizers} handleClick = {setSelectedOrganizer} current={selectedOrganizer} default="-- Select an Organizer --"/>
 
         <BarGraph data={newData} title={"Number of Performance over time"} xaxis={"year"} yaxis={"value"} yaxisName={"Number of Performances"} click={setSelectedYear}/>
 

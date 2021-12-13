@@ -10,7 +10,7 @@ import Seo from "../components/seo"
 import {graphql} from "gatsby"
 
 import { Map, Marker, Draggable } from "pigeon-maps"
-import * as styles from './performance-records.module.scss'
+import './performance-records.scss'
 
 const Page2 = ({
     data: {
@@ -153,17 +153,17 @@ const Page2 = ({
 
         <Row>
         <Col>
-        <Map className={styles.map} height={500} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
+        <Map className="map" height={500} defaultCenter={[1.3521, 103.8198]} defaultZoom={11}>
 
           {selectedNode != null && 
             <Draggable offset={[-150, 100]} anchor={anchor} onDragEnd={setAnchor}>
-              <Container className = {styles.popup}>
-                <p className = {styles.popupBox}>Drag and Drop</p>
-                <p className = {styles.popupTitle}>Performace Title: </p>
-                <p>{selectedNode.Performance_Title}</p>
-                <p className = {styles.popupTitle}>Genre: </p> 
+              <Container className = "popup">
+                <p className = "popupBox">Drag and Drop</p>
+                <p className = "popupTitle">Performace Title: </p>
+                <p className = "popupTitleText">{selectedNode.Performance_Title}</p>
+                <p className = "popupTitle">Genre: </p> 
                 <p>{selectedNode.Genres_concatenated}</p>
-                <p className = {styles.popupTitle}>Time: </p>
+                <p className = "popupTitle">Time: </p>
                 <p>{selectedNode.Time}</p>
                 
               </Container>
@@ -175,14 +175,14 @@ const Page2 = ({
           const long = node.Longtitude ? parseFloat(node.Longtitude) : null
 
           return (
-            <Marker className = {styles.marker} width={50} anchor={[lat, long]} onClick={() => {handleClickMap(node)} } />
+            <Marker className = "marker" width={50} anchor={[lat, long]} onClick={() => {handleClickMap(node)} } />
           );
         })}
 
         </Map>
         </Col>
 
-        <EventList className={styles.eventlist} data={eventList} attribute={["Performance_Title","Genres_concatenated","Time"]}></EventList>
+        <EventList className="eventlist" data={eventList} attribute={["Performance_Title","Genres_concatenated","Time"]}></EventList>
 
         </Row> 
         </Container>

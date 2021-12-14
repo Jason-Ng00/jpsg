@@ -11,7 +11,7 @@ import { Spring } from "react-spring/renderprops";
 import VisibilitySensor from "react-visibility-sensor";
 
 
-const GenresByDecades = ({
+const GenresByTimeline = ({
     data: {
       page: {
         name,
@@ -332,10 +332,10 @@ const GenresByDecades = ({
     );
   };
   
-export default GenresByDecades
+export default GenresByTimeline
 
 export const data = graphql`
-    query newChart2{
+    query genreByTimeline{
         page: googleDocs(slug: {eq: "/performance-records"}) {
           name
           description

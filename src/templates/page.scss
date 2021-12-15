@@ -38,3 +38,12 @@ p {
 .carouselImg {
     object-fit:cover;
 }
+
+.genreCard, .dataCollectionCard {
+    background-color: transparent;
+    height: 780px;
+
+    div {
+        background-color: transparent;
+    }
+}

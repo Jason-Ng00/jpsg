@@ -23,7 +23,7 @@ export default function BarGraph(props) {
 
         <ResponsiveContainer width="100%" height={300}>
           <BarChart width={150} height={80} data={data}>
-          <YAxis label={{ value: props.yaxisName ? props.yaxisName : props.yaxis, angle: -90}} />
+          <YAxis label={{ value: props.yaxisName ? props.yaxisName : props.yaxis, angle: -90, dx: -25}} />
           <Tooltip />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey={props.xaxis} label={{ value: props.xaxis, position: 'insideBottomRight', offset: 0 }}/>

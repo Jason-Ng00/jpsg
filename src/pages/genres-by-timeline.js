@@ -9,6 +9,13 @@ import { Waypoint } from 'react-waypoint';
 
 import { Spring } from "react-spring/renderprops";
 import VisibilitySensor from "react-visibility-sensor";
+import { useSpring, animated } from "react-spring";
+
+import bgImage1 from "../images/Genres by timeline/GENRES BY TIMELINE_1916 to 1945_takarazuka.jpeg"
+import bgImage2 from "../images/Genres by timeline/GENRES BY TIMELINE_1946-1976_wikimedia_singapore river.jpeg"
+import bgImage3 from "../images/Genres by timeline/GENRES BY TIMELINE_1977-1999_tworks_themorningstarproject002.jpeg"
+import bgImage4 from "../images/Genres by timeline/GENRES BY TIMELINE_2000 till present_ninagawa macbeth.jpg"
+
 
 
 const GenresByTimeline = ({
@@ -36,6 +43,7 @@ const GenresByTimeline = ({
   const atTopStyle = {position:"unset", zIndex:"1"}
   const notAtTopStyle = {position:"fixed", zIndex:"1", top:"0",transform: "translate(calc(50vw - 50%), calc(50vh - 50%))"}
 
+  
   chartData.nodes.map(event => 
     {  
       var currGenres = []
@@ -151,7 +159,7 @@ const GenresByTimeline = ({
 
         <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-           Genres By Decades
+           Genres By Timeline
           </h1>
         </Jumbotron>
 
@@ -165,8 +173,9 @@ const GenresByTimeline = ({
       <Container  style={atTop ? atTopStyle : notAtTopStyle}>
         {activeSegment === 1 &&  
               <Container>
+
               <Row>
-                <Col xs={4} md={4} lg={4}>
+                <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
                   <h3>The late 19 century to end of WWII; 1916 to 1945 </h3>
                   <p>The very first visiting Japanese performers was an acrobatic troupe called 
                   Masuda troupe that arrived in January 1896. They put up advertisement in the papers 
@@ -176,8 +185,10 @@ const GenresByTimeline = ({
                   1938 and again in January 1939, on their way to and back from Europe. As expected of 
                   war time situation, there wasn’t a lot of performances in this time period. </p>
                 </Col>
-                <Col xs={8} md={8} lg={8}>
+                <Col xs={7} md={7} lg={7}>
                   <PieChart data = {numberPerformanceByGenreAndDecades[0]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
+                </Col>
+                <Col>
                 </Col>
               </Row>
               </Container>
@@ -185,10 +196,10 @@ const GenresByTimeline = ({
             {activeSegment === 2 && 
               <Container>
               <Row>
-              <Col xs={8} md={8} lg={8}>
+              <Col xs={7} md={7} lg={7}>
                 <PieChart data = {numberPerformanceByGenreAndDecades[1]} radius = {100} innerRadius={30} containerHeight={500} color={"#213970"}/>
               </Col>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
               <h3>Immediate postwar to the announcement of the Fukuda Doctrine in 1977  </h3>
                   <p>After the war several important institutions that contributed to the promotion of theatrical performances, 
                   both government and non-profit, were formed.  These include the Singapore National Theatre Trust (1960); the 
@@ -203,13 +214,12 @@ const GenresByTimeline = ({
               </Col>
             </Row>
             </Container>
-
             }
             {activeSegment === 3  &&           
               <Container>
             <Row>
 
-              <Col xs={4} md={4} lg={4}>
+            <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
               <h3>1977 through 1999 </h3>
               <pp>One important factor in cultural exchanges amongst countries is often the foreign policy. 
               The Japan Foundation was established in 1972, then the Fukuda Doctrine which detailed the Japanese foreign
@@ -220,7 +230,7 @@ const GenresByTimeline = ({
                Japanese performances as can be seen here. </pp>
               </Col>
 
-              <Col xs={8} md={8} lg={8}>
+              <Col xs={7} md={7} lg={7}>
                 <PieChart data = {numberPerformanceByGenreAndDecades[2]} radius = {100} innerRadius={30} containerHeight={500} color={"#5b0e2d"}/>
               </Col>
             </Row>
@@ -231,10 +241,10 @@ const GenresByTimeline = ({
               <Container>
             <Row>
 
-            <Col xs={8} md={8} lg={8}>
+            <Col xs={7} md={7} lg={7}>
                 <PieChart data = {numberPerformanceByGenreAndDecades[3]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
               </Col>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
               <h3>2000s</h3>
               <p>The twenty-first century saw several important miles stones in the scene of Japan-Singapore cultural exchange. 2015 was the 50th 
               year anniversary of formal diplomatic relationship, and then March 2019 the global pandemic hit, brought along a heretofore unfathomable 
@@ -251,7 +261,7 @@ const GenresByTimeline = ({
 
         <VisibilitySensor style={{height:"1000px"}}>
             {({ isVisible }) => (
-              <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+              <Spring delay={100} from={{opacity: 0}} to={{height: isVisible ? 1 : 100, opacity: isVisible ? 0.6 : 0 }}>
                 {({ opacity }) => (<Container style={{ opacity }}>
 
             <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
@@ -269,7 +279,7 @@ const GenresByTimeline = ({
 
           <VisibilitySensor partialVisibility>
             {({ isVisible }) => (
-              <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+              <Spring delay={100} from={{opacity: 0}} to={{ height: isVisible ? 1 : 100, opacity: isVisible ? 0.6 : 0 }}>
                 {({ opacity }) => (<Container style={{ opacity }}>
 
             <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
@@ -286,7 +296,7 @@ const GenresByTimeline = ({
 
         <VisibilitySensor partialVisibility>
           {({ isVisible }) => (
-            <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
+            <Spring delay={100} from={{opacity: 0}} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}>
 
           <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>

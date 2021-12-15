@@ -127,9 +127,7 @@ export default function PieGraph(props) {
     "#ffffff"]
 
     return (
-      <div style={{ width: '100%' }}>
-        <div>{props.title}</div>
-
+      <div style={{ width: '100%', display:"flex", flexDirection:"column", alignItems:"center", margin:"50px 0px"}}>
         <ResponsiveContainer width="100%" height={props.containerHeight ? props.containerHeight : 600}>
         <PieChart width={730} height={250}>
         <Legend layout="horizontal" verticalAlign="top" align="center" />
@@ -145,6 +143,7 @@ export default function PieGraph(props) {
             </Pie>
         </PieChart>
         </ResponsiveContainer>
+        <h3>{props.title}</h3>
       </div>
     );
 }

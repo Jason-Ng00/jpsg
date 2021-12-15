@@ -5,11 +5,11 @@ import React from "react";
 import "./page.scss"
 import Layout from "../components/Layout/Layout.js";
 import Seo from "../components/seo";
-import { Container, Jumbotron, Carousel} from 'react-bootstrap'
+import { Container, Jumbotron, Carousel, Col, Row, Card} from 'react-bootstrap'
 
 import image1 from "../images/carousel/chingay 2021_jas.jpeg"
-import image2 from "../images/carousel/drama centre.png"
-import image3 from "../images/carousel/kallang theatre.png"
+import image2 from "../images/carousel/Singapore National Theatre.png"
+import image3 from "../images/carousel/performance2016.png"
 import image4 from "../images/carousel/Kamishibai_NLB_Nov2015.jpg"
 
 import venue1 from "../images/venues/dbs-2fynqgp.jpg"
@@ -22,6 +22,12 @@ import venue7 from "../images/venues/marinabaysand.png"
 import venue8 from "../images/venues/nationaltheatre.png"
 import venue9 from "../images/venues/sgconferencehall.png"
 import venue10 from "../images/venues/victorial.png"
+
+import genre1 from "../images/genres/picture1.png"
+import genre2 from "../images/genres/picture2.png"
+
+import dataCollection1 from "../images/data collection/picture1.png"
+import dataCollection2 from "../images/data collection/picture2.png"
 
 const pageFromGDocs = ({
   data: {
@@ -167,6 +173,59 @@ const pageFromGDocs = ({
                 <td>Victoria Theatre and Concert Hall are Singapore’s oldest performing arts venue to date. The VTCH today comprises of two buildings – formerly Victoria Memorial Hall and Town Hall, which are joined by a clock tower. The Town Hall was converted into a theatre and renamed Victoria Theatre in 1909. The Victoria Memorial Hall was renamed Victoria Concert Hall in 1979 after extensive renovations to upgrade and improves the facilities, and has since become the home of the Singapore Symphony Orchestra (SSO). In 2010, the VTCH underwent another four-year renovation, and reopened in July 2014. The VTCH now has a 614-seat Theatre and a 673-seat Concert Hall, with two smaller rooms for music, dance and theatre rehearsals. It is currently managed by the Arts House Ltd.</td>
               </tr>
             </table>
+           }
+           {pageTitle === "Genre" &&
+            <Row>
+           <Col>
+            <Card className="genreCard">
+              <Card.Img variant="top" src={genre1} width = "200px" height = "600px"/>
+              <Card.Body>
+              <Card.Text>
+              A poster of Nihon Buyo performance - Takarazuka Revue: National Theatre, 11-12 December 1982. (Source: National Theatre Trust Collection, courtesy of National Archives of Singapore)
+              </Card.Text>
+              </Card.Body>
+            </Card>
+            </Col>
+
+          <Col>
+            <Card className="genreCard">
+              <Card.Img variant="top" src={genre2} width = "200px" height = "600px" />
+              <Card.Body>
+              <Card.Text>
+              A poster of Jazz performance - Jazz of Japan by Nabua Hara and his Sharps & Flats: Victoria Theatre, 21 & 22 January 1978 at 8.30 pm (Source: National Theatre Trust Collection, courtesy of National Archives of Singapore)
+              </Card.Text>
+              </Card.Body>
+            </Card>
+            </Col>
+
+            </Row>
+           }
+
+           {pageTitle === "Data Collection" &&
+            <Row>
+           <Col>
+            <Card className="dataCollectionCard">
+              <Card.Img variant="top" src={dataCollection1} width = "200px" height = "600px"/>
+              <Card.Body>
+              <Card.Text>
+              The Matsumoto Ballet Company from Japan: National Theatre, 2 Sep 1977, 8pm. (Source: National Theatre Trust Collection, courtesy of National Archives of Singapore)
+              </Card.Text>
+              </Card.Body>
+            </Card>
+            </Col>
+
+          <Col>
+            <Card className="dataCollectionCard">
+              <Card.Img variant="top" src={dataCollection2} width = "200px" height = "600px" />
+              <Card.Body>
+              <Card.Text>
+              Nihon Buyo: Lee Foundation Theatre, Nanyang Academy of Fine Arts, 4 & 5 November 2010, 7pm - 8.30pm (Source: <a href = "https://www.sg.emb-japan.go.jp/JCC/event_BUYO_04112010.html">Japan Creative Centre</a>)
+              </Card.Text>
+              </Card.Body>
+            </Card>
+            </Col>
+
+            </Row>
            }
       </Container>
     </Layout>

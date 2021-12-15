@@ -18,7 +18,7 @@ import bgImage4 from "../images/Genres by timeline/GENRES BY TIMELINE_2000 till 
 
 
 
-const GenresByTimeline = ({
+const PerformancesByTimeline = ({
     data: {
       page: {
         name,
@@ -159,7 +159,7 @@ const GenresByTimeline = ({
 
         <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-           Genres By Timeline
+           Performances By Timeline
           </h1>
         </Jumbotron>
 
@@ -259,14 +259,14 @@ const GenresByTimeline = ({
       </Container>
 
 
-        <VisibilitySensor style={{height:"1000px"}}>
+        <VisibilitySensor>
             {({ isVisible }) => (
-              <Spring delay={100} from={{opacity: 0}} to={{height: isVisible ? 1 : 100, opacity: isVisible ? 0.6 : 0 }}>
+              <Spring delay={100} from={{opacity: 0}} to={{opacity: isVisible ? 0.6 : 0 }}>
                 {({ opacity }) => (<Container style={{ opacity }}>
 
-            <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <h1 style={{ justifyContent: "center", height:"800px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
-              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveSegment(1)} }}
+              onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveSegment(1);setAtTop(true)}; }}
               onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveSegment(2);setAtTop(false)} else {setAtTop(true)}}}
             />
             </h1>
@@ -277,15 +277,15 @@ const GenresByTimeline = ({
             )}
           </VisibilitySensor>
 
-          <VisibilitySensor partialVisibility>
+          <VisibilitySensor>
             {({ isVisible }) => (
               <Spring delay={100} from={{opacity: 0}} to={{ height: isVisible ? 1 : 100, opacity: isVisible ? 0.6 : 0 }}>
                 {({ opacity }) => (<Container style={{ opacity }}>
 
-            <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+            <h1 style={{ justifyContent: "center", height:"800px", display:"flex", alignItems:"center",color:"#808080"}}>
             <Waypoint
               onEnter={({ previousPosition, currentPosition, event }) => {if(currentPosition > previousPosition) {setActiveSegment(2)} }}
-              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveSegment(3)} else {setActiveSegment(1)}}}
+              onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveSegment(3)} else {setActiveSegment(1);setAtTop(true)}}}
             />
             </h1>
 
@@ -294,12 +294,12 @@ const GenresByTimeline = ({
             )}
           </VisibilitySensor>
 
-        <VisibilitySensor partialVisibility>
+        <VisibilitySensor>
           {({ isVisible }) => (
             <Spring delay={100} from={{opacity: 0}} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}>
 
-          <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+          <h1 style={{ justifyContent: "center", height:"800px", display:"flex", alignItems:"center",color:"#808080"}}>
           <Waypoint
             onEnter={() => {setActiveSegment(3)}}
             onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveSegment(4)} else {setActiveSegment(2)}}}
@@ -313,12 +313,12 @@ const GenresByTimeline = ({
         </VisibilitySensor>
 
 
-        <VisibilitySensor partialVisibility>
+        <VisibilitySensor>
           {({ isVisible }) => (
             <Spring delay={100} to={{ opacity: isVisible ? 0.6 : 0 }}>
               {({ opacity }) => (<Container style={{ opacity }}> 
 
-             <h1 style={{ justifyContent: "center", height:"1000px", display:"flex", alignItems:"center",color:"#808080"}}>
+             <h1 style={{ justifyContent: "center", height:"800px", display:"flex", alignItems:"center",color:"#808080"}}>
              <Waypoint
             onEnter={() => {setActiveSegment(4)}}
             onLeave={({ previousPosition, currentPosition, event }) => {if(currentPosition === "above") {setActiveSegment(0)} else {setActiveSegment(3)}}}
@@ -342,10 +342,10 @@ const GenresByTimeline = ({
     );
   };
   
-export default GenresByTimeline
+export default PerformancesByTimeline
 
 export const data = graphql`
-    query genreByTimeline{
+    query performancesByTimeline{
         page: googleDocs(slug: {eq: "/performance-records"}) {
           name
           description

@@ -10,7 +10,7 @@ import { Container, Jumbotron, Carousel, Col, Row, Card} from 'react-bootstrap'
 import image1 from "../images/carousel/chingay 2021_jas.jpeg"
 import image2 from "../images/carousel/Singapore National Theatre.png"
 import image3 from "../images/carousel/performance2016.png"
-import image4 from "../images/carousel/Kamishibai_NLB_Nov2015.jpg"
+import image4 from "../images/carousel/Kamishibai 2016.png"
 
 import venue1 from "../images/venues/dbs-2fynqgp.jpg"
 import venue2 from "../images/venues/dramacenter.png"

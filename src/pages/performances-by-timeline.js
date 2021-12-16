@@ -245,7 +245,7 @@ const PerformancesByTimeline = ({
                 <PieChart data = {numberPerformanceByGenreAndDecades[3]} radius = {100} innerRadius={30} containerHeight={500} color={"#132d59"}/>
               </Col>
               <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-              <h3>2000s</h3>
+              <h3>2000 till Present</h3>
               <p>The twenty-first century saw several important miles stones in the scene of Japan-Singapore cultural exchange. 2015 was the 50th 
               year anniversary of formal diplomatic relationship, and then March 2019 the global pandemic hit, brought along a heretofore unfathomable 
               impact on theatrical performances. In the happier days of 2015 and 2016, we saw many performances from Japan visiting Singapore. 

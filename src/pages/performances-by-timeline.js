@@ -165,7 +165,7 @@ const PerformancesByTimeline = ({
 
 
         <Container style={{position:"fixed", zIndex:"1", top:"300px", left:"50px", width:"100px"}}>
-            <p style={activeSegment === 1 ? activeStyles : null}>1916 to 1945</p>
+            <p style={activeSegment === 1 ? activeStyles : null}>Late 19 century to end of WWII</p>
             <p style={activeSegment === 2 ? activeStyles : null}>1946 to 1976 </p>
             <p style={activeSegment === 3 ? activeStyles : null}>1977 to 1999 </p>
             <p style={activeSegment === 4 ? activeStyles : null}>2000 till Present </p>
@@ -176,7 +176,7 @@ const PerformancesByTimeline = ({
 
               <Row>
                 <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-                  <h3>The late 19 century to end of WWII; 1916 to 1945 </h3>
+                  <h3>The late 19 century to end of WWII </h3>
                   <p>The very first visiting Japanese performers was an acrobatic troupe called 
                   Masuda troupe that arrived in January 1896. They put up advertisement in the papers 
                   and were here for several days. Subsequently we also saw more similar kind of performance 
@@ -221,13 +221,13 @@ const PerformancesByTimeline = ({
 
             <Col xs={5} md={5} lg={5} style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
               <h3>1977 through 1999 </h3>
-              <pp>One important factor in cultural exchanges amongst countries is often the foreign policy. 
+              <p>One important factor in cultural exchanges amongst countries is often the foreign policy. 
               The Japan Foundation was established in 1972, then the Fukuda Doctrine which detailed the Japanese foreign
                policies towards Asean countries was announced in 1977. We can see that the number of visiting Japanese 
                performances after 1977 has increased, and so were the kind of genre. More Japan-related official 
                institutions were formed in the 70s through the 90s, including the establishment of the Department of 
                Japanese Studies in 1981, and the Japan Creative Centre in 2009, which expanded the scope of visiting 
-               Japanese performances as can be seen here. </pp>
+               Japanese performances as can be seen here. </p>
               </Col>
 
               <Col xs={7} md={7} lg={7}>

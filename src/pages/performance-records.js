@@ -140,7 +140,7 @@ const Page2 = ({
 
         <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
           <h1 style={{ justifyContent: "center", backgroundColor:"#FFEEDD", height:"130px", display:"flex", alignItems:"center",color:"#808080"}}>
-            Japanese Performances in Singapore, 1965-2015
+            Japanese Performances in Singapore, 1893-2020
           </h1>
   
         </Jumbotron>

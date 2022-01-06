@@ -44,13 +44,10 @@ module.exports = {
         // GitHub Flavored Markdown mode (default: true)
         gfm: true,
         // Plugins configs
-        plugins: [  
-          "gatsby-remark-images",
-        ],
+        plugins: ["gatsby-remark-images"],
       },
     },
 
-  
     {
       resolve: `gatsby-source-filesystem`,
       options: {

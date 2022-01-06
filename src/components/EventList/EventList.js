@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
-import Pagination from '../Pagination/Pagination.js';
-import './EventList.scss';
+import React, { useState } from "react"
+import Pagination from "../Pagination/Pagination.js"
+import "./EventList.scss"
 
-let PageSize = 10;
+let PageSize = 10
 
-const EventList = (props) => {
+const EventList = props => {
   const attribute = props.attribute
-  const data = props.data;
+  const data = props.data
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const firstPageIndex = (currentPage - 1) * PageSize;
-  const lastPageIndex = firstPageIndex + PageSize;
-  const currentTableData = data.slice(firstPageIndex, lastPageIndex);
+  const firstPageIndex = (currentPage - 1) * PageSize
+  const lastPageIndex = firstPageIndex + PageSize
+  const currentTableData = data.slice(firstPageIndex, lastPageIndex)
 
   return (
     <>
       <table>
         <thead>
           <tr>
-          {attribute.map(attr => <td>{attr}</td>)}
+            {attribute.map(attr => (
+              <td>{attr}</td>
+            ))}
           </tr>
         </thead>
         <tbody>
           {currentTableData.map(item => {
             return (
               <tr>
-                {attribute.map(attr => <td>{item[attr]}</td>)}
+                {attribute.map(attr => (
+                  <td>{item[attr]}</td>
+                ))}
               </tr>
-
-            );
+            )
           })}
         </tbody>
       </table>
@@ -41,7 +44,7 @@ const EventList = (props) => {
         onPageChange={page => setCurrentPage(page)}
       />
     </>
-  );
+  )
 }
 
 export default EventList

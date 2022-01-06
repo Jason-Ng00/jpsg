@@ -12,39 +12,46 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css"
 import Header from "../Header/Header.js"
 import Navbar from "../Navbar/Navbar.js"
 import Footer from "../Footer/Footer.js"
 import * as styles from "./Layout.module.scss"
 
 import { motion } from "framer-motion"
-import { Container } from 'react-bootstrap'
+import { Container } from "react-bootstrap"
 
 const Layout = ({ children }) => {
   return (
-
     <Container className={styles.layout}>
-    <Header />
-    <Navbar />
+      <Header />
+      <Navbar />
 
-    <motion.main className={styles.contentContainer}
-         initial={{ opacity: 0, x: -200 }}
-         animate={{ opacity: 1, x: 0 }}
-         exit={{ opacity: 0, x: 200 }}
-         transition={{
-           type: "spring",
-           mass: 0.35,
-           stiffness: 75,
-           duration: 1.0
-           }}>
-
+      <motion.main
+        className={styles.contentContainer}
+        initial={{ opacity: 0, x: -200 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 200 }}
+        transition={{
+          type: "spring",
+          mass: 0.35,
+          stiffness: 75,
+          duration: 1.0,
+        }}
+      >
         {children}
-        <footer style={{textAlign:"center", marginTop:"100px", paddingBottom:"30px", fontSize:"10px"}}>
-          In collaboration with <a href="http://libds.nus.edu.sg/">NUS Libraries</a>. <a href="http://datavis.sg/">Powered by Datavis</a>.    
+        <footer
+          style={{
+            textAlign: "center",
+            marginTop: "100px",
+            paddingBottom: "30px",
+            fontSize: "10px",
+          }}
+        >
+          In collaboration with{" "}
+          <a href="http://libds.nus.edu.sg/">NUS Libraries</a>.{" "}
+          <a href="http://datavis.sg/">Powered by Datavis</a>.
         </footer>
-
-      
       </motion.main>
       <Footer />
     </Container>

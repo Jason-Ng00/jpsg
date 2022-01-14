@@ -64,7 +64,7 @@ const Venue = ({ data: { chartData } }) => {
   })
   return (
     <Layout>
-      <Seo title={"Visualize by Major Venues"} />
+      <Seo title={"Visualize by Venues"} />
       <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
         <h1
           style={{
@@ -76,7 +76,7 @@ const Venue = ({ data: { chartData } }) => {
             color: "#808080",
           }}
         >
-          Visualize by Major Venues
+          Visualize by Venues
         </h1>
       </Jumbotron>
 

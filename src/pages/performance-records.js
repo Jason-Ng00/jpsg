@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Container, Row, Col, Jumbotron } from "react-bootstrap"
 import { useEffect, useState } from "react"
+import { GatsbyImage } from "gatsby-plugin-image"
 import LineGraph from "../components/LineGraph/LineGraph.js"
 
 import EventList from "../components/EventList/EventList.js"
@@ -131,7 +132,20 @@ const Page2 = ({
   return (
     <Layout>
       <Seo title={pageTitle} />
-
+      {cover && (
+          <GatsbyImage
+            image={cover.image.childImageSharp.gatsbyImageData}
+            alt={cover.alt}
+            title={cover.title}
+            style={{
+              height: `500px`,
+              display: `flex`,
+              justifyContent: `center`,
+              marginBottom: `15px`,
+            }}
+            imgStyle={{ objectPosition: "0px" }}
+          />
+        )}
       <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
         <h1
           style={{
@@ -181,8 +195,12 @@ const Page2 = ({
                     </p>
                     <p className="popupTitle">Genre: </p>
                     <p>{selectedNode.Genres_concatenated}</p>
+
+                    <p className="popupTitle">Date: </p>
+                    <p>{selectedNode.Date}</p>
                     <p className="popupTitle">Time: </p>
                     <p>{selectedNode.Time}</p>
+
                   </Container>
                 </Draggable>
               )}
@@ -210,7 +228,7 @@ const Page2 = ({
           <EventList
             className="eventlist"
             data={eventList}
-            attribute={["Performance_Title", "Genres_concatenated", "Time"]}
+            attribute={["Performance_Title", "Genres_concatenated", "Date"]}
           ></EventList>
         </Row>
       </Container>

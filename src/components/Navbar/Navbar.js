@@ -60,6 +60,16 @@ export default function NavBar({ location }) {
     "Performance Records",
     "Highlights",
   ]
+  
+  const aboutThisProjectSort = [
+    "Data Collection",
+    "Venues",
+    "Genres",
+    "Organizers",
+    "The Team",
+    "Acknowledgement",
+    "Resources"
+  ]
 
   menuData.sort(function (a, b) {
     var keyA = menuSort.indexOf(a[0].name),
@@ -69,6 +79,18 @@ export default function NavBar({ location }) {
     if (keyA > keyB) return 1
     return 0
   })
+
+  menuData[2].sort(function (a, b) {
+    var keyA = aboutThisProjectSort.indexOf(a.name),
+      keyB = aboutThisProjectSort.indexOf(b.name)
+    // Compare the 2 year
+    if (keyA < keyB) return -1
+    if (keyA > keyB) return 1
+    return 0
+  })
+
+
+
   return (
     <Container className={styles.navbar}>
       <Container>
@@ -79,7 +101,7 @@ export default function NavBar({ location }) {
               {/* <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/">Home</Link> */}
 
               {menuData.map(navItem => {
-                if (navItem.length === 1) {
+                if (navItem.length === 1 && navItem[0].name != "Page order") {
                   return (
                     <Link
                       key={navItem[0].name}
@@ -90,7 +112,9 @@ export default function NavBar({ location }) {
                       {navItem[0].name}
                     </Link>
                   )
-                } else {
+                } else if (navItem[0].name == "Page order") {
+                    return 
+                  } else {
                   var rows = []
                   var dropdownItem = []
                   for (var i = 1; i < navItem.length; i++) {

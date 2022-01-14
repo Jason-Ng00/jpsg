@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "jpsg",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Japanese performances in Singapore - Cultural Interactions and Beyond",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Lim Beng Choo, Lie Kim Ai Natalie, Ng Chin Seang, Gaetan Boisson",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",

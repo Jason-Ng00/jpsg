@@ -45,11 +45,9 @@ const DataCollection = ({
         <h1
           style={{
             justifyContent: "center",
-            backgroundColor: "#FFEEDD",
-            height: "130px",
+            height: "100px",
             display: "flex",
             alignItems: "center",
-            color: "#808080",
           }}
         >
           Data Collection

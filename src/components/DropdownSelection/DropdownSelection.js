@@ -11,6 +11,8 @@ export default function DropdownSelection(props) {
     handleClick(e.target.value)
   }
 
+  list.sort()
+
   return (
     <Container>
       <select

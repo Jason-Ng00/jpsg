@@ -157,11 +157,9 @@ const PerformancesByTimeline = ({
         <h1
           style={{
             justifyContent: "center",
-            backgroundColor: "#FFEEDD",
             height: "130px",
             display: "flex",
             alignItems: "center",
-            color: "#808080",
           }}
         >
           Performances By Timeline

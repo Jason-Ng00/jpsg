@@ -63,12 +63,11 @@ export default function LineGraph(props) {
           />
           <YAxis
             label={{
-              value: props.yaxisName ? props.yaxisName : props.yaxis,
+              value: props.yaxisName ? props.yaxisName : null,
               angle: -90,
             }}
           />
           <Tooltip content={<CustomTooltip />} />
-          <Legend />
           <defs>
             <linearGradient id="colorUv" x1="0%" y1="0" x2="100%" y2="0">
               <stop offset="0%" stopColor="blue" />
@@ -82,7 +81,7 @@ export default function LineGraph(props) {
             dataKey={props.yaxis}
             stroke="url(#colorUv)"
             dot={false}
-            activeDot={{ onClick: handleClick }}
+            activeDot={{ onClick: handleClick, stroke: 'purple', strokeWidth: 3 }}
           />
         </LineChart>
       </ResponsiveContainer>

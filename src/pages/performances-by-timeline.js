@@ -165,7 +165,7 @@ const PerformancesByTimeline = ({
           Performances By Timeline
         </h1>
       </Jumbotron>
-      <Container
+      {/* <Container
         style={{
           position: "fixed",
           zIndex: "1",
@@ -182,7 +182,7 @@ const PerformancesByTimeline = ({
         <p style={activeSegment === 4 ? activeStyles : null}>
           2000 till Present{" "}
         </p>
-      </Container>
+      </Container> */}
       <Container style={atTop ? atTopStyle : notAtTopStyle}>
         {activeSegment === 1 && (
           <Container>
@@ -363,6 +363,58 @@ const PerformancesByTimeline = ({
                 <h1
                   style={{
                     justifyContent: "center",
+                    height: "300px",
+                    textAlign: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    color: "#808080",
+                  }}
+                >
+                  <Waypoint
+                    onEnter={({ previousPosition, currentPosition, event }) => {
+                      if (currentPosition > previousPosition) {
+                        setActiveSegment(0)
+                        setAtTop(true)
+                      }
+                    }}
+                    onLeave={({ previousPosition, currentPosition, event }) => {
+                      if (currentPosition === "above") {
+                        setActiveSegment(1)
+                        setAtTop(false)
+                      } else {
+                        setAtTop(false)
+                      }
+                    }}
+                  />
+                  <div style={{
+                    justifyContent: "center",
+                    height: "300px",
+                    width: "500px",
+                    textAlign: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    color: "#808080",
+                  }}>Scroll down to watch the how Japanese Perfomrances changes over time</div>
+                  
+
+                </h1>
+              </Container>
+            )}
+          </Spring>
+        )}
+      </VisibilitySensor>
+      <VisibilitySensor>
+        {({ isVisible }) => (
+          <Spring
+            delay={100}
+            from={{ opacity: 0 }}
+            to={{ opacity: isVisible ? 0.6 : 0 }}
+          >
+            {({ opacity }) => (
+              <Container style={{ opacity }}>
+                <h1
+                  style={{
+                    justifyContent: "center",
                     height: "800px",
                     display: "flex",
                     alignItems: "center",
@@ -373,15 +425,15 @@ const PerformancesByTimeline = ({
                     onEnter={({ previousPosition, currentPosition, event }) => {
                       if (currentPosition > previousPosition) {
                         setActiveSegment(1)
-                        setAtTop(true)
+                        setAtTop(false)
                       }
                     }}
                     onLeave={({ previousPosition, currentPosition, event }) => {
                       if (currentPosition === "above") {
                         setActiveSegment(2)
-                        setAtTop(false)
                       } else {
-                        setAtTop(true)
+                        setActiveSegment(0)
+                        setAtTop(false)
                       }
                     }}
                   />
@@ -420,7 +472,7 @@ const PerformancesByTimeline = ({
                         setActiveSegment(3)
                       } else {
                         setActiveSegment(1)
-                        setAtTop(true)
+                        setAtTop(false)
                       }
                     }}
                   />

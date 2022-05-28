@@ -16,7 +16,7 @@ const Organizer = ({ data: {
     description,
     childMarkdownRemark: { html },
   },
-  populationData, chartData, sponsorData } }) => {
+  chartData, sponsorData } }) => {
   var eventDetails = chartData.nodes
   var eventList = []
   const years = []
@@ -34,10 +34,7 @@ const Organizer = ({ data: {
     lookup[pair.sponsor] = pair.type
   }
 
-  var populationGraphData = populationData.nodes.map(function (d) {
-    d.value = parseInt(d.value, 10)
-    return d
-  })
+ 
   const [selectedOrganizer, setSelectedOrganizer] = React.useState(
     "-- Select an Organizer --"
   )
@@ -121,13 +118,7 @@ const Organizer = ({ data: {
       </Jumbotron>
 
       <Container>
-        <BarGraph
-          data={populationGraphData}
-          title={"Number of Japanese Residents in Singapore Over Time"}
-          xaxis={"year"}
-          yaxis={"value"}
-          yaxisName={"Number of Japanese Residents"}
-        />
+
 
         <PieChart
           data={sponsorGraphData}
@@ -158,6 +149,7 @@ const Organizer = ({ data: {
           data={eventList}
           attribute={[
             "Performance_Title",
+            "Organizers_concatenated",
             "Genres_concatenated",
             "Date",
             "Time",
@@ -188,12 +180,7 @@ export const data = graphql`
         html
       }
     }
-    populationData: allJpInSgCsv {
-      nodes {
-        year: Year
-        value: Num_of_Japanese_living_in_Singapore__as_of_October_of_each_year_
-      }
-    }
+
     chartData: allJpsgCsv {
       distinct(field: Organizers_concatenated)
       nodes {

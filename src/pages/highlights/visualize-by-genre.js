@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Container, Jumbotron } from "react-bootstrap"
+import { Container, Jumbotron, Button } from "react-bootstrap"
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
 
@@ -19,6 +19,7 @@ const Genre = ({ data: { chartData } }) => {
     "-- Select a Genre --"
   )
   const [selectedYear, setSelectedYear] = React.useState(null)
+
 
   const genres = chartData.distinct
   const distinct_genres = []
@@ -42,15 +43,13 @@ const Genre = ({ data: { chartData } }) => {
       event.Genres_concatenated.includes(selectedGenre)
     )
   }
+  
 
-  eventDetails.map(event => {
-    if (selectedYear && event.Date.slice(0, 4) === selectedYear) {
-      eventList.push(event)
-    } else if (!selectedYear) {
-      eventList.push(event)
-    }
 
-    var year = event.Date.slice(0, 4)
+  chartData.nodes.map(event => {
+    if (selectedGenre === "-- Select a Genre --" && selectedYear && event.Date.slice(0, 4) === selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
     if (!years.includes(year)) {
       years.push(year)
       newData.push({
@@ -64,8 +63,77 @@ const Genre = ({ data: { chartData } }) => {
         }
       }
     }
+    } else if (selectedGenre === "-- Select a Genre --" && !selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } else if (event.Genres_concatenated.includes(selectedGenre) && selectedYear && event.Date.slice(0, 4) === selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } else if (event.Genres_concatenated.includes(selectedGenre) && !selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } 
+
+    
     return newData
   })
+
+  var final_genres = []
+  if (!selectedYear) {
+    final_genres = distinct_genres
+  } else {
+    eventList.map(event => {
+      var currGenres = []
+      currGenres = event.Genres_concatenated.split(";")
+      for (var i = 0; i < currGenres.length; i++) {
+        var currGenre = currGenres[i].trim()
+  
+        if (!final_genres.includes(currGenre)) {
+          final_genres.push(currGenre)
+        }
+      }
+      return event
+    })
+  }
 
   newData.sort(function (a, b) {
     var keyA = Number(a.year),
@@ -77,6 +145,7 @@ const Genre = ({ data: { chartData } }) => {
   })
   return (
     <Layout>
+    {alert(JSON.stringify(final_genres))}
       <Seo title={"Visualize by Major Genres"} />
       <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
         <h1
@@ -99,11 +168,13 @@ const Genre = ({ data: { chartData } }) => {
         </Dropdown> */}
 
         <DropdownSelection
-          data={distinct_genres}
+          data={final_genres}
           handleClick={setSelectedGenre}
           current={selectedGenre}
           default="-- Select a Genre --"
         />
+
+        <Button bsStyle="primary" onClick={() => {setSelectedGenre("-- Select a Genre --"); setSelectedYear(null); alert(selectedGenre)}}>Reset</Button>
 
         <BarGraph
           data={newData}
@@ -111,6 +182,7 @@ const Genre = ({ data: { chartData } }) => {
           xaxis={"year"}
           yaxis={"value"}
           yaxisName={"Number of Performances"}
+          activeIndex = {selectedYear}
           click={setSelectedYear}
         />
 

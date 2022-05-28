@@ -13,7 +13,7 @@ import organizers2 from "../../images/organizers/japan creative centre.png"
 import organizers3 from "../../images/organizers/the japan foundation.png"
 import organizers4 from "../../images/organizers/the japanese association singapore.png"
 import organizers5 from "../../images/organizers/national arts council.png"
-import organizers6 from "../../images/organizers/national theatre trust.jpg"
+import organizers6 from "../../images/organizers/national theatre trust.png"
 import organizers7 from "../../images/organizers/national library board.jpg"
 import organizers8 from "../../images/organizers/vivid creations.png"
 
@@ -234,5 +234,6 @@ export const data = graphql`
         html
       }
     }
+    
   }
 `

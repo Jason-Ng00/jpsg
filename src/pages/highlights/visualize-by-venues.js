@@ -99,6 +99,7 @@ const Venue = ({ data: { chartData } }) => {
           data={eventList}
           attribute={[
             "Performance_Title",
+            "Venue_concatenated",
             "Genres_concatenated",
             "Date",
             "Time",

@@ -16,7 +16,7 @@ export default function DropdownSelection(props) {
   return (
     <Container>
       <select
-        value={currValue}
+        value={props.current}
         onChange={handleChange}
         style={{ width: "500px" }}
       >

@@ -48,9 +48,7 @@ const Layout = ({ children }) => {
             fontSize: "10px",
           }}
         >
-          In collaboration with{" "}
-          <a href="http://libds.nus.edu.sg/">NUS Libraries</a>.{" "}
-          <a href="http://datavis.sg/">Powered by Datavis</a>.
+
         </footer>
       </motion.main>
       <Footer />

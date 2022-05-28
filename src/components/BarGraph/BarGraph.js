@@ -21,6 +21,9 @@ export default function BarGraph(props) {
       setActiveIndex(null)
       props.click(null)
     }
+    if (props.activeindex) {
+      setActiveIndex(props.activeIndex)
+    } 
   }
   const data = props.data
 

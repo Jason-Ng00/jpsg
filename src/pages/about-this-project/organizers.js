@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Container, Jumbotron, Carousel, Col, Row, Card } from "react-bootstrap"
 import { useEffect, useState } from "react"
-import { GatsbyImage } from "gatsby-plugin-image"
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 
 
 import Layout from "../../components/Layout/Layout.js"
@@ -74,7 +74,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers1} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="none" style={{minWidth: "300px"}} src="../../images/organizers/japanese cultural society singapore.jpg" width="300px" height="200px" alt="venue" />
               </td>
               <td>Japanese Cultural Society Singapore</td>
               <td>
@@ -93,7 +93,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers2} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="none" style={{minWidth: "300px"}} src="../../images/organizers/japan creative centre.png" width="300px" height="200px" alt="venue" />
               </td>
               <td>Japan Creative Centre</td>
               <td>
@@ -110,7 +110,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers3} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="contain" style={{minWidth: "300px"}} src="../../images/organizers/the japan foundation.png" width="300px" height="200px" alt="venue" />
               </td>
               <td>The Japan Foundation</td>
               <td>
@@ -124,7 +124,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers4} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="none" style={{minWidth: "300px"}} src="../../images/organizers/the japanese association singapore.png" width="300px" height="200px" alt="venue" />
               </td>
               <td>The Japanese Association, Singapore</td>
               <td>
@@ -141,7 +141,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers5} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="none" style={{minWidth: "300px"}} src= "../../images/organizers/national arts council.png" width="300px" height="200px" alt="venue" />
               </td>
               <td>National Arts Council</td>
               <td>
@@ -161,7 +161,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers6} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="contain" style={{minWidth: "300px"}} src= "../../images/organizers/national theatre trust.png" width="300px" height="200px" alt="venue" />
               </td>
               <td>National Theatre Trust</td>
               <td>
@@ -177,7 +177,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers7} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="contain" style={{minWidth: "300px"}} src= "../../images/organizers/national library board.jpg" width="300px" height="200px" alt="venue" />
               </td>
               <td>National Library Board</td>
               <td>
@@ -194,7 +194,7 @@ const Organizers = ({
 
             <tr>
               <td>
-                <img src={organizers8} width="300px" height="200px" alt="venue" />
+                <StaticImage objectFit="contain" style={{minWidth: "300px"}} src= "../../images/organizers/vivid creations.png" width="300px" height="200px" alt="venue" />
               </td>
               <td>Vivid Creations</td>
               <td>

@@ -150,11 +150,9 @@ const Page2 = ({
         <h1
           style={{
             justifyContent: "center",
-            backgroundColor: "#FFEEDD",
             height: "130px",
             display: "flex",
             alignItems: "center",
-            color: "#808080",
           }}
         >
           Japanese Performances in Singapore, 1893-2020
@@ -169,7 +167,6 @@ const Page2 = ({
           title={"Number of Performances"}
           xaxis={"year"}
           yaxis={"value"}
-          yaxisName={"Number of Performances"}
           click={setSelectedYear}
         />
 

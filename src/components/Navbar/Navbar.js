@@ -56,12 +56,13 @@ export default function NavBar({ location }) {
   const menuSort = [
     "Introduction",
     "About this Project",
-    "Historical Context",
+    "The Setting",
     "Performance Records",
     "Highlights",
   ]
   
   const aboutThisProjectSort = [
+    "About this Project",
     "Data Collection",
     "Venues",
     "Genres",
@@ -74,16 +75,16 @@ export default function NavBar({ location }) {
   menuData.sort(function (a, b) {
     var keyA = menuSort.indexOf(a[0].name),
       keyB = menuSort.indexOf(b[0].name)
-    // Compare the 2 year
+
     if (keyA < keyB) return -1
     if (keyA > keyB) return 1
     return 0
   })
 
-  menuData[2].sort(function (a, b) {
+  menuData[1].sort(function (a, b) {
     var keyA = aboutThisProjectSort.indexOf(a.name),
       keyB = aboutThisProjectSort.indexOf(b.name)
-    // Compare the 2 year
+
     if (keyA < keyB) return -1
     if (keyA > keyB) return 1
     return 0
@@ -99,9 +100,8 @@ export default function NavBar({ location }) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {/* <Link className={styles.navItemNoDropdown} activeStyle={activeStyles} to="/">Home</Link> */}
-
               {menuData.map(navItem => {
-                if (navItem.length === 1 && navItem[0].name != "Page order") {
+                if (navItem.length === 1) {
                   return (
                     <Link
                       key={navItem[0].name}
@@ -112,9 +112,7 @@ export default function NavBar({ location }) {
                       {navItem[0].name}
                     </Link>
                   )
-                } else if (navItem[0].name == "Page order") {
-                    return 
-                  } else {
+                } else {
                   var rows = []
                   var dropdownItem = []
                   for (var i = 1; i < navItem.length; i++) {
@@ -124,6 +122,7 @@ export default function NavBar({ location }) {
                           key={navItem[i].name}
                           className={styles.navDropdown}
                           to={navItem[i].slug}
+                          activeStyle={activeStyles}
                           target="_self"
                         >
                           {navItem[i].name}
@@ -135,7 +134,7 @@ export default function NavBar({ location }) {
                   return (
                     <HoverControlledDropdown
                       style={
-                        url.includes(navItem[0].name.toLowerCase())
+                        url.includes(navItem[0].name.split(" ").join("-").toLowerCase())
                           ? activeStyles
                           : {}
                       }
@@ -151,32 +150,35 @@ export default function NavBar({ location }) {
                 }
               })}
               {/* <HoverControlledDropdown style={url.includes("highlights".toLowerCase().replaceALl(" ","-")) ? activeStyles : {}} key="Highlights" className={styles.navItemDropdown} title="Highlights"> */}
-              <HoverControlledDropdown
+              {/* <HoverControlledDropdown
                 style={url.includes("highlights") ? activeStyles : {}}
                 key="Highlights"
                 className={styles.navItemDropdown}
                 title="Highlights"
               >
                 <Link
-                  key="Visualize by Genre"
+                  key="Visualize by Genres"
                   className={styles.navDropdown}
                   to="/highlights/genre"
+                  activeStyle={activeStyles}
                   target="_self"
                 >
                   Visualize by Genre
                 </Link>
                 <Link
-                  key="Visualize by Major Venues"
+                  key="Visualize by Venues"
                   className={styles.navDropdown}
                   to="/highlights/venue"
+                  activeStyle={activeStyles}
                   target="_self"
                 >
                   Visualize by Venues
                 </Link>
                 <Link
-                  key="Visualize by Mojor Organizers"
+                  key="Visualize by Organizers"
                   className={styles.navDropdown}
                   to="/highlights/organizers"
+                  activeStyle={activeStyles}
                   target="_self"
                 >
                   Visualize by Major Organizers
@@ -185,11 +187,12 @@ export default function NavBar({ location }) {
                   key="Population Trend Mapping"
                   className={styles.navDropdown}
                   to="/highlights/pop"
+                  activeStyle={activeStyles}
                   target="_self"
                 >
                   Population Trend Mapping
                 </Link>
-              </HoverControlledDropdown>
+              </HoverControlledDropdown> */}
 
               <Link
                 className={styles.navItemNoDropdown}

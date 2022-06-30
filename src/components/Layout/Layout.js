@@ -40,16 +40,6 @@ const Layout = ({ children }) => {
         }}
       >
         {children}
-        <footer
-          style={{
-            textAlign: "center",
-            marginTop: "100px",
-            paddingBottom: "30px",
-            fontSize: "10px",
-          }}
-        >
-
-        </footer>
       </motion.main>
       <Footer />
     </Container>

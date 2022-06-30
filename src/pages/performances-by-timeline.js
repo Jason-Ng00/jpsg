@@ -394,7 +394,7 @@ const PerformancesByTimeline = ({
                     display: "flex",
                     alignItems: "center",
                     color: "#808080",
-                  }}>Scroll down to watch the how Japanese Perfomrances changes over time</div>
+                  }}>Scroll down to watch how the Japanese Perfomrances changes over time</div>
                   
 
                 </h1>

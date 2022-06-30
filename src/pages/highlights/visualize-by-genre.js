@@ -145,7 +145,7 @@ const Genre = ({ data: { chartData } }) => {
   })
   return (
     <Layout>
-    {alert(JSON.stringify(final_genres))}
+    {/* {alert(JSON.stringify(final_genres))} */}
       <Seo title={"Visualize by Major Genres"} />
       <Jumbotron style={{ backgroundColor: "#F2F4F8", padding: `0` }}>
         <h1

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Container, Jumbotron, Button } from "react-bootstrap"
+import { Container, Jumbotron, Button, Col, Row } from "react-bootstrap"
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
 
@@ -19,7 +19,6 @@ const Genre = ({ data: { chartData } }) => {
     "-- Select a Genre --"
   )
   const [selectedYear, setSelectedYear] = React.useState(null)
-
 
   const genres = chartData.distinct
   const distinct_genres = []
@@ -167,14 +166,20 @@ const Genre = ({ data: { chartData } }) => {
             </a>
         </Dropdown> */}
 
+        <Row>
+        <Col sm={11} md={11}>
         <DropdownSelection
           data={final_genres}
           handleClick={setSelectedGenre}
           current={selectedGenre}
           default="-- Select a Genre --"
         />
-
-        <Button bsStyle="primary" onClick={() => {setSelectedGenre("-- Select a Genre --"); setSelectedYear(null); alert(selectedGenre)}}>Reset</Button>
+        </Col>
+        
+        <Col sm={1} md={1}>
+        <Button bsStyle="primary" onClick={() => {setSelectedGenre("-- Select a Genre --"); setSelectedYear(null)}}>Reset</Button>
+        </Col>
+        </Row>
 
         <BarGraph
           data={newData}

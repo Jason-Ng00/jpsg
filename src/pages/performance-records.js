@@ -59,7 +59,7 @@ const Page2 = ({
 
   if (selectedNode && selectedTime) {
     eventDetails.map(event => {
-      if (event === selectedNode && event.Time === selectedTime) {
+      if (parseFloat(event.Latitude) === anchor[0] && parseFloat(event.Longtitude) === anchor[1] && event.Time === selectedTime) {
         eventList.push(event)
       }
       if (selectedYear && event.Date.slice(0, 4) === selectedYear) {
@@ -177,15 +177,14 @@ const Page2 = ({
               height={500}
               defaultCenter={[1.3521, 103.8198]}
               defaultZoom={11}
-            >
-              {selectedNode != null && (
+          >
+              {/* {selectedNode != null && (
                 <Draggable
                   offset={[-150, 100]}
                   anchor={anchor}
                   onDragEnd={setAnchor}
                 >
                   <Container className="popup">
-                    <p className="popupBox">Drag and Drop</p>
                     <p className="popupTitle">Performace Title: </p>
                     <p className="popupTitleText">
                       {selectedNode.Performance_Title}
@@ -197,10 +196,10 @@ const Page2 = ({
                     <p>{selectedNode.Date}</p>
                     <p className="popupTitle">Time: </p>
                     <p>{selectedNode.Time}</p>
-
+                    <p className="popupBox">Drag and Place it Anywhere</p>
                   </Container>
                 </Draggable>
-              )}
+              )} */}
 
               {mapData.map(node => {
                 const lat = node.Latitude ? parseFloat(node.Latitude) : null
@@ -225,7 +224,7 @@ const Page2 = ({
           <EventList
             className="eventlist"
             data={eventList}
-            attribute={["Performance_Title", "Genres_concatenated", "Date"]}
+            attribute={["Performance_Title", "Genres_concatenated", "Venue_concatenated", "Date"]}
           ></EventList>
         </Row>
       </Container>

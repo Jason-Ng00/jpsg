@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Container, Jumbotron } from "react-bootstrap"
+import { Container, Jumbotron, Row, Col, Button } from "react-bootstrap"
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
 import PieChart from "../../components/PieChart/PieChart.js"
@@ -69,14 +69,10 @@ const Organizer = ({ data: {
     )
   }
 
-  eventDetails.map(event => {
-    if (selectedYear && event.Date.slice(0, 4) === selectedYear) {
+  chartData.nodes.map(event => {
+    if (selectedOrganizer === "-- Select an Organizer --" && selectedYear && event.Date.slice(0, 4) === selectedYear) {
       eventList.push(event)
-    } else if (!selectedYear) {
-      eventList.push(event)
-    }
-
-    var year = event.Date.slice(0, 4)
+      var year = event.Date.slice(0, 4)
     if (!years.includes(year)) {
       years.push(year)
       newData.push({
@@ -90,8 +86,78 @@ const Organizer = ({ data: {
         }
       }
     }
+    } else if (selectedOrganizer === "-- Select an Organizer --" && !selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } else if (event.Organizers_concatenated.includes(selectedOrganizer) && selectedYear && event.Date.slice(0, 4) === selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } else if (event.Organizers_concatenated.includes(selectedOrganizer) && !selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } 
+
+    
     return newData
   })
+  var final_organizers = []
+  if (!selectedYear) {
+    final_organizers = distinct_organizers
+  } else {
+    eventList.map(event => {
+      var currOrganizers = []
+      currOrganizers = event.Organizers_concatenated.split(";")
+      for (var i = 0; i < currOrganizers.length; i++) {
+        var currOrganizer = currOrganizers[i].trim()
+  
+        if (!final_organizers.includes(currOrganizer)) {
+          final_organizers.push(currOrganizer)
+        }
+      }
+      return event
+    })
+  }
+
+
 
   newData.sort(function (a, b) {
     var keyA = Number(a.year),
@@ -129,12 +195,20 @@ const Organizer = ({ data: {
           title="The Sponsors of Japanese Performances"
         />
 
+        <Row>
+        <Col sm={11} md={11}>
         <DropdownSelection
-          data={distinct_organizers}
+          data={final_organizers}
           handleClick={setSelectedOrganizer}
           current={selectedOrganizer}
           default="-- Select an Organizer --"
         />
+        </Col>
+
+        <Col sm={1} md={1}>
+        <Button bsStyle="primary" onClick={() => {setSelectedOrganizer("-- Select an Organizer --"); setSelectedYear(null)}}>Reset</Button>
+        </Col>
+        </Row>
 
         <BarGraph
           data={newData}

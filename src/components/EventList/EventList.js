@@ -20,7 +20,7 @@ const EventList = props => {
         <thead>
           <tr>
             {attribute.map(attr => (
-              <td>{attr.split("_").map(word => word[0].toUpperCase() + word.substr(1)).join(" ")}</td>
+              <td>{attr.split("_").filter(item => item != "concatenated").map(word => word[0].toUpperCase() + word.substr(1)).join(" ")}</td>
             ))}
           </tr>
         </thead>

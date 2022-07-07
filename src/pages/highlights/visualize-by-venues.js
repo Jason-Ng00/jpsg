@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Container, Jumbotron } from "react-bootstrap"
+import { Container, Jumbotron, Row, Col, Button} from "react-bootstrap"
 
 import BarGraph from "../../components/BarGraph/BarGraph.js"
 import EventList from "../../components/EventList/EventList.js"
@@ -16,6 +16,7 @@ const Venue = ({ data: { chartData } }) => {
   var eventList = []
   const years = []
   const newData = []
+  var distinct_venues = chartData.distinct
 
   const [selectedVenue, setSelectedVenue] = React.useState(
     "-- Select a Venue --"
@@ -30,14 +31,10 @@ const Venue = ({ data: { chartData } }) => {
     )
   }
 
-  eventDetails.map(event => {
-    if (selectedYear && event.Date.slice(0, 4) === selectedYear) {
+  chartData.nodes.map(event => {
+    if (selectedVenue === "-- Select a Venue --" && selectedYear && event.Date.slice(0, 4) === selectedYear) {
       eventList.push(event)
-    } else if (!selectedYear) {
-      eventList.push(event)
-    }
-
-    var year = event.Date.slice(0, 4)
+      var year = event.Date.slice(0, 4)
     if (!years.includes(year)) {
       years.push(year)
       newData.push({
@@ -51,8 +48,74 @@ const Venue = ({ data: { chartData } }) => {
         }
       }
     }
+    } else if (selectedVenue === "-- Select a Venue --" && !selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } else if (event.Venue_concatenated === selectedVenue && selectedYear && event.Date.slice(0, 4) === selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } else if (event.Venue_concatenated === selectedVenue && !selectedYear) {
+      eventList.push(event)
+      var year = event.Date.slice(0, 4)
+    if (!years.includes(year)) {
+      years.push(year)
+      newData.push({
+        year: year,
+        value: 1,
+      })
+    } else {
+      for (var data of newData) {
+        if (data.year === year) {
+          data.value += 1
+        }
+      }
+    }
+    } 
+
+    
     return newData
   })
+
+  var final_venues = []
+  if (!selectedYear) {
+    final_venues = distinct_venues
+  } else {
+    eventList.map(event => {
+      var currVenue = event.Venue_concatenated
+      if (!final_venues.includes(currVenue)) {
+        final_venues.push(currVenue)
+      }
+      
+
+    })
+  }
+
 
   newData.sort(function (a, b) {
     var keyA = Number(a.year),
@@ -79,12 +142,20 @@ const Venue = ({ data: { chartData } }) => {
       </Jumbotron>
 
       <Container>
+      <Row>
+      <Col sm={11} md={11}>
         <DropdownSelection
-          data={chartData.distinct}
+          data={final_venues}
           handleClick={setSelectedVenue}
           current={selectedVenue}
           default="-- Select a Venue --"
         />
+      </Col>
+
+      <Col sm={1} md={1}>
+        <Button bsStyle="primary" onClick={() => {setSelectedVenue("-- Select a Venue --"); setSelectedYear(null)}}>Reset</Button>
+        </Col>
+        </Row>
 
         <BarGraph
           data={newData}
@@ -94,6 +165,7 @@ const Venue = ({ data: { chartData } }) => {
           yaxisName={"Number of Performances"}
           click={setSelectedYear}
         />
+
 
         <EventList
           data={eventList}

@@ -35,7 +35,7 @@ const PerformancesByTimeline = ({
   const newData = []
 
   const activeStyles = { borderBottom: "3px solid #ef7c00", color: "#003D7C" }
-  const [activeSegment, setActiveSegment] = React.useState(1)
+  const [activeSegment, setActiveSegment] = React.useState(0)
   const [atTop, setAtTop] = React.useState(true)
   const atTopStyle = { position: "unset", zIndex: "1" }
   const notAtTopStyle = {
@@ -394,7 +394,7 @@ const PerformancesByTimeline = ({
                     display: "flex",
                     alignItems: "center",
                     color: "#808080",
-                  }}>Scroll down to watch how the Japanese Perfomrances changes over time</div>
+                  }}>Scroll down to watch how the Japanese Performances changes over time</div>
                   
 
                 </h1>
